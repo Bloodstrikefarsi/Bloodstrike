@@ -11,4 +11,9 @@ body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:1.5rem}
 .card{padding:1rem;background:#1f1f1f;border-radius:10px;text-align:center}
 .contact,.about{padding:2rem 0;text-align:center}
+.social-links{list-style:none;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+.social-links li{display:flex;align-items:center;gap:0.5rem}
+.social-links li img{width:24px;height:24px}
+.social-links li a{color:var(--text);text-decoration:none;font-weight:bold}
+.social-links li a:hover{color:var(--accent)}
 .site-footer{padding:1.5rem 0;text-align:center;color:#999;margin-top:2rem}
