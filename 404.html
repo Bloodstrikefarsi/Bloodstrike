@@ -1,10 +1,126 @@
-<!doctype html>
-<html lang="fa">
-<head><meta charset="utf-8"><title>صفحه پیدا نشد</title><link rel="stylesheet" href="styles.css"></head>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه پیدا نشد - 404</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
 <body>
-<main class="container">
-<h1>۴۰۴ — صفحه پیدا نشد</h1>
-<p>این صفحه وجود ندارد. <a href="/">بازگشت به خانه</a></p>
-</main>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>BloodStrike Farsi</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="error-container">
+                    <div class="error-code">404</div>
+                    <h1 class="error-title">صفحه مورد نظر یافت نشد</h1>
+                    <p class="error-description">متأسفانه صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.</p>
+                    <div class="error-actions">
+                        <a href="index.html" class="btn btn-primary">
+                            <i class="fas fa-home"></i>
+                            بازگشت به صفحه اصلی
+                        </a>
+                        <a href="#games" class="btn btn-secondary">
+                            <i class="fas fa-gamepad"></i>
+                            مشاهده بازی‌ها
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-background">
+                <div class="floating-element el1"></div>
+                <div class="floating-element el2"></div>
+                <div class="floating-element el3"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 BloodStrike Farsi. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-actions .btn i {
+            margin-left: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-actions .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
 </body>
 </html>
