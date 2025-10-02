@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloodstrike Farsi</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #111, #222);
+      color: #fff;
+    }
+    header {
+      background: #ff0000;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 10px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #ff4444;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      background: #ff0000;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #cc0000;
+      transform: scale(1.05);
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔥 Bloodstrike Farsi 🔥</h1>
+    <nav>
+      <a href="#">خانه</a>
+      <a href="#">درباره</a>
+      <a href="#">تماس</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>به Bloodstrike فارسی خوش آمدید</h2>
+    <p>اینجا مرجع فارسی بازی Bloodstrike هست. اخبار، آموزش‌ها و مطالب جذاب رو می‌تونی اینجا پیدا کنی.</p>
+    <a href="#" class="btn">بیشتر بدانید</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Bloodstrike Farsi - تمامی حقوق محفوظ است.</p>
+  </footer>
+</body>
+</html>
