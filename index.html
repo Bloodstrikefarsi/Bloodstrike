@@ -3,863 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodStrike Farsi - مرجع گیمینگ فارسی</title>
+    <title>BloodStrike Farsi - دنیای گیمینگ</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #ff2d55;
-            --secondary: #5856d6;
-            --accent: #ff3b30;
-            --dark: #0f0f1a;
-            --darker: #070711;
-            --light: #f2f2f7;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, var(--darker), var(--dark));
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            perspective: 1000px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* هدر */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(15, 15, 26, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            transform-style: preserve-3d;
-        }
-
-        .navbar {
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--light);
-            transform: translateZ(20px);
-        }
-
-        .logo i {
-            color: var(--primary);
-            animation: pulse 2s infinite;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-menu a:hover {
-            color: var(--primary);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--light);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* بخش اصلی */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding-top: 80px;
-            transform-style: preserve-3d;
-        }
-
-        .hero-content {
-            z-index: 2;
-            max-width: 800px;
-            padding: 0 20px;
-            transform: translateZ(50px);
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero-description {
-            font-size: 1.5rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            transform: translateZ(30px);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            transform: translateZ(40px);
-        }
-
-        .btn {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            display: inline-block;
-            transform-style: preserve-3d;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.4);
-            transform: translateZ(20px);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent);
-            transform: translateY(-5px) translateZ(30px);
-            box-shadow: 0 15px 40px rgba(255, 45, 85, 0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--light);
-            border: 2px solid var(--glass-border);
-            transform: translateZ(20px);
-        }
-
-        .btn-secondary:hover {
-            background: var(--glass);
-            transform: translateY(-5px) translateZ(30px);
-            border-color: var(--primary);
-        }
-
-        /* عناصر سه‌بعدی در پس‌زمینه */
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-            transform-style: preserve-3d;
-        }
-
-        .floating-element.el1 {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-            transform: translateZ(-100px);
-        }
-
-        .floating-element.el2 {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-            transform: translateZ(-50px);
-        }
-
-        .floating-element.el3 {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-            transform: translateZ(-80px);
-        }
-
-        /* بخش بازی‌ها */
-        .games-section {
-            padding: 100px 0;
-            background: rgba(0, 0, 0, 0.3);
-            transform-style: preserve-3d;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            position: relative;
-            transform: translateZ(40px);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 150px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            transform-style: preserve-3d;
-        }
-
-        .game-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.5s ease;
-            box-shadow: var(--glass-shadow);
-            transform-style: preserve-3d;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .game-card:hover {
-            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg) translateZ(20px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .game-card:hover::before {
-            opacity: 1;
-        }
-
-        .game-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            transform: translateZ(30px);
-            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-        }
-
-        .game-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--light);
-            transform: translateZ(20px);
-        }
-
-        .game-card p {
-            margin-bottom: 2rem;
-            opacity: 0.8;
-            transform: translateZ(15px);
-        }
-
-        .game-rating {
-            color: #ffd700;
-            font-size: 1.3rem;
-            transform: translateZ(10px);
-        }
-
-        /* بخش شبکه‌های اجتماعی */
-        .social-section {
-            padding: 100px 0;
-            transform-style: preserve-3d;
-        }
-
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
-            transform-style: preserve-3d;
-        }
-
-        .social-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            text-decoration: none;
-            color: var(--light);
-            transition: all 0.5s ease;
-            box-shadow: var(--glass-shadow);
-            transform-style: preserve-3d;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .social-card:hover::before {
-            left: 100%;
-        }
-
-        .social-card:hover {
-            transform: translateY(-10px) rotateX(3deg) rotateY(-3deg) translateZ(15px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--primary);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .social-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            flex-shrink: 0;
-            transform: translateZ(25px);
-            box-shadow: 0 8px 25px rgba(255, 45, 85, 0.3);
-        }
-
-        .social-content {
-            flex: 1;
-            transform: translateZ(20px);
-        }
-
-        .social-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .social-content p {
-            opacity: 0.8;
-            font-size: 1rem;
-        }
-
-        .social-arrow {
-            opacity: 0;
-            transform: translateX(-15px) translateZ(10px);
-            transition: all 0.3s ease;
-        }
-
-        .social-card:hover .social-arrow {
-            opacity: 1;
-            transform: translateX(0) translateZ(15px);
-        }
-
-        /* بخش درباره ما */
-        .about-section {
-            padding: 100px 0;
-            background: rgba(0, 0, 0, 0.3);
-            transform-style: preserve-3d;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .about-text {
-            transform: translateZ(30px);
-        }
-
-        .about-text p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            transform: translateZ(20px);
-        }
-
-        .about-features {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            transform: translateZ(25px);
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            padding: 1.2rem;
-            background: var(--glass);
-            border-radius: 15px;
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px) translateZ(10px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .feature i {
-            color: var(--primary);
-            font-size: 1.5rem;
-            transform: translateZ(15px);
-        }
-
-        .about-image {
-            display: flex;
-            justify-content: center;
-            transform: translateZ(40px);
-        }
-
-        .image-placeholder {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            opacity: 0.8;
-            animation: pulse 2s ease-in-out infinite alternate;
-            box-shadow: 0 15px 40px rgba(255, 45, 85, 0.3);
-            transform-style: preserve-3d;
-        }
-
-        /* بخش آمار */
-        .stats-section {
-            padding: 80px 0;
-            background: rgba(0, 0, 0, 0.2);
-            transform-style: preserve-3d;
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            transform-style: preserve-3d;
-        }
-
-        .stat-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.5s ease;
-            box-shadow: var(--glass-shadow);
-            transform-style: preserve-3d;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px) rotateX(5deg) translateZ(15px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-icon {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            transform: translateZ(25px);
-            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-        }
-
-        .stat-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.2rem;
-            color: var(--light);
-            transform: translateZ(20px);
-        }
-
-        .stat-content p {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transform: translateZ(15px);
-        }
-
-        .stat-content span {
-            opacity: 0.8;
-            font-size: 1rem;
-            transform: translateZ(10px);
-        }
-
-        /* بخش فان */
-        .fun-section {
-            padding: 80px 0;
-            background: rgba(0, 0, 0, 0.2);
-            transform-style: preserve-3d;
-        }
-
-        .fun-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            transform-style: preserve-3d;
-        }
-
-        .fun-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.5s ease;
-            box-shadow: var(--glass-shadow);
-            transform-style: preserve-3d;
-        }
-
-        .fun-card:hover {
-            transform: translateY(-10px) rotateX(5deg) translateZ(15px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .fun-icon {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            transform: translateZ(25px);
-            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-        }
-
-        .fun-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.2rem;
-            color: var(--light);
-            transform: translateZ(20px);
-        }
-
-        .fun-number {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transform: translateZ(15px);
-        }
-
-        .fun-description {
-            opacity: 0.8;
-            font-size: 1rem;
-            transform: translateZ(10px);
-        }
-
-        /* فوتر */
-        .footer {
-            background: var(--darker);
-            padding: 3rem 0 1rem;
-            border-top: 1px solid var(--glass-border);
-            transform-style: preserve-3d;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 2.5rem;
-            margin-bottom: 2rem;
-            transform: translateZ(20px);
-        }
-
-        .footer-section h3,
-        .footer-section h4 {
-            margin-bottom: 1.2rem;
-            color: var(--light);
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section ul li a {
-            color: var(--light);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-section ul li a:hover {
-            opacity: 1;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.2rem;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: var(--glass);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--light);
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-5px) translateZ(10px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--glass-border);
-            opacity: 0.7;
-            transform: translateZ(10px);
-        }
-
-        /* انیمیشن‌ها */
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg) translateZ(0); 
-            }
-            50% { 
-                transform: translateY(-20px) rotate(180deg) translateZ(10px); 
-            }
-        }
-
-        @keyframes pulse {
-            from { 
-                transform: scale(1) translateZ(0); 
-            }
-            to { 
-                transform: scale(1.05) translateZ(10px); 
-            }
-        }
-
-        /* رسپانسیو */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                flex-direction: column;
-                background: var(--dark);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 2rem 0;
-                border-top: 1px solid var(--glass-border);
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .hero-title {
-                font-size: 2.8rem;
-            }
-
-            .hero-description {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .games-grid,
-            .social-grid,
-            .fun-grid,
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .btn {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
-        }
-    </style>
 </head>
 <body>
+    <!-- پس‌زمینه سه بعدی -->
+    <div class="bg-3d">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <!-- هدر سایت -->
     <header class="header">
         <nav class="navbar">
-            <div class="container nav-container">
+            <div class="nav-container">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
                     <span>BloodStrike Farsi</span>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#home">صفحه اصلی</a></li>
-                    <li><a href="#games">بازی‌ها</a></li>
-                    <li><a href="#social">شبکه‌های اجتماعی</a></li>
-                    <li><a href="#fun">آمار فان</a></li>
-                    <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#about">درباره ما</a></li>
+                    <li><a href="#home" class="nav-link">صفحه اصلی</a></li>
+                    <li><a href="#games" class="nav-link">بازی‌ها</a></li>
+                    <li><a href="#fun" class="nav-link">آمار فان</a></li>
+                    <li><a href="#social" class="nav-link">شبکه‌ها</a></li>
+                    <li><a href="#about" class="nav-link">درباره ما</a></li>
+                    <li><a href="#contact" class="nav-link">تماس با ما</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -875,99 +50,184 @@
         <!-- بخش هیرو -->
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">به دنیای گیمینگ خوش آمدید</h1>
-                <p class="hero-description">مرجع تخصصی بازی BloodStrike و سایر بازی‌های محبوب</p>
-                <div class="hero-buttons">
-                    <a href="#games" class="btn btn-primary">مشاهده بازی‌ها</a>
-                    <a href="#social" class="btn btn-secondary">پیوستن به جامعه</a>
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-word">به</span>
+                        <span class="title-word">دنیای</span>
+                        <span class="title-word">گیمینگ</span>
+                        <span class="title-word">خوش آمدید</span>
+                    </h1>
+                    <p class="hero-description">مرجع تخصصی بازی BloodStrike و سایر بازی‌های محبوب با طراحی مدرن و سه بعدی</p>
+                    <div class="hero-buttons">
+                        <a href="#games" class="btn btn-primary">
+                            <span class="btn-text">مشاهده بازی‌ها</span>
+                            <div class="btn-glow"></div>
+                        </a>
+                        <a href="#social" class="btn btn-secondary">
+                            <span class="btn-text">پیوستن به جامعه</span>
+                            <div class="btn-glow"></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card">
+                        <div class="card-content">
+                            <i class="fas fa-crosshairs"></i>
+                            <h3>BloodStrike</h3>
+                            <p>اکشن و تیراندازی</p>
+                        </div>
+                        <div class="card-glow"></div>
+                    </div>
                 </div>
             </div>
-            <div class="hero-background">
-                <div class="floating-element el1"></div>
-                <div class="floating-element el2"></div>
-                <div class="floating-element el3"></div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
             </div>
         </section>
 
         <!-- بخش بازی‌های محبوب -->
         <section id="games" class="games-section">
             <div class="container">
-                <h2 class="section-title">محبوب ترین بازی‌ها</h2>
+                <div class="section-header">
+                    <h2 class="section-title">محبوب ترین بازی‌ها</h2>
+                    <p class="section-subtitle">با بهترین بازی‌های جهان آشنا شوید</p>
+                </div>
                 <div class="games-grid">
                     <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-crosshairs"></i>
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="game-icon">
+                                    <i class="fas fa-crosshairs"></i>
+                                </div>
+                                <h3>BloodStrike</h3>
+                                <p>بازی اکشن و تیراندازی آنلاین</p>
+                                <div class="card-hint">برای اطلاعات بیشتر کلیک کنید</div>
+                            </div>
+                            <div class="card-back">
+                                <h4>ویژگی‌های بازی</h4>
+                                <ul>
+                                    <li>گرافیک فوق العاده</li>
+                                    <li>بازی آنلاین چندنفره</li>
+                                    <li>سلاح‌های متنوع</li>
+                                    <li>جامعه فعال</li>
+                                </ul>
+                                <div class="game-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
                         </div>
-                        <h3>BloodStrike</h3>
-                        <p>بازی اکشن و تیراندازی آنلاین با گرافیک فوق العاده و گیم پلی جذاب</p>
-                        <div class="game-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
+                        <div class="card-glow"></div>
                     </div>
+
                     <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-battle-net"></i>
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="game-icon">
+                                    <i class="fas fa-battle-net"></i>
+                                </div>
+                                <h3>بازی ۲</h3>
+                                <p>توضیحات مختصری درباره بازی دوم</p>
+                                <div class="card-hint">برای اطلاعات بیشتر کلیک کنید</div>
+                            </div>
+                            <div class="card-back">
+                                <h4>ویژگی‌های بازی</h4>
+                                <ul>
+                                    <li>گرافیک فوق العاده</li>
+                                    <li>بازی آنلاین چندنفره</li>
+                                    <li>سلاح‌های متنوع</li>
+                                    <li>جامعه فعال</li>
+                                </ul>
+                                <div class="game-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
                         </div>
-                        <h3>Call of Duty</h3>
-                        <p>بازی تیراندازی اول شخص با کمپین داستانی فوق العاده</p>
-                        <div class="game-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
+                        <div class="card-glow"></div>
                     </div>
+
                     <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-ghost"></i>
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="game-icon">
+                                    <i class="fas fa-ghost"></i>
+                                </div>
+                                <h3>بازی ۳</h3>
+                                <p>توضیحات مختصری درباره بازی سوم</p>
+                                <div class="card-hint">برای اطلاعات بیشتر کلیک کنید</div>
+                            </div>
+                            <div class="card-back">
+                                <h4>ویژگی‌های بازی</h4>
+                                <ul>
+                                    <li>گرافیک فوق العاده</li>
+                                    <li>بازی آنلاین چندنفره</li>
+                                    <li>سلاح‌های متنوع</li>
+                                    <li>جامعه فعال</li>
+                                </ul>
+                                <div class="game-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
                         </div>
-                        <h3>PUBG Mobile</h3>
-                        <p>بازی بتل رویال محبوب با گرافیک واقعی و گیم پلی سریع</p>
-                        <div class="game-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <i class="far fa-star"></i>
-                        </div>
+                        <div class="card-glow"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- بخش فان -->
+        <!-- بخش آمار فان -->
         <section id="fun" class="fun-section">
             <div class="container">
-                <h2 class="section-title">آمار فان و طنز! 😄</h2>
+                <div class="section-header">
+                    <h2 class="section-title">آمار فان و طنز! 😄</h2>
+                    <p class="section-subtitle">آمارهای خنده‌دار و جالب از دنیای گیمینگ</p>
+                </div>
                 <div class="fun-grid">
                     <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-calendar-alt"></i>
+                        <div class="fun-content">
+                            <div class="fun-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3>سابقه فعالیت</h3>
+                            <div class="fun-number">۸۵ سال</div>
+                            <p class="fun-description">با وجود اینکه بازی فقط ۳ ساله منتشر شده!</p>
                         </div>
-                        <h3>سابقه فعالیت</h3>
-                        <p class="fun-number">۸۵ سال</p>
-                        <p class="fun-description">با وجود اینکه بازی فقط ۳ ساله منتشر شده!</p>
+                        <div class="card-glow"></div>
                     </div>
+
                     <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-handshake"></i>
+                        <div class="fun-content">
+                            <div class="fun-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>معاملات موفق</h3>
+                            <div class="fun-number">بیش از ۸۵ میلیون</div>
+                            <p class="fun-description">معامله در سراسر جهان!</p>
                         </div>
-                        <h3>معاملات موفق</h3>
-                        <p class="fun-number">بیش از ۸۵ میلیون</p>
-                        <p class="fun-description">معامله در سراسر جهان!</p>
+                        <div class="card-glow"></div>
                     </div>
+
                     <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-gamepad"></i>
+                        <div class="fun-content">
+                            <div class="fun-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3>بازی تحت پوشش</h3>
+                            <div class="fun-number">۸۵ عدد</div>
+                            <p class="fun-description">بازی مختلف فقط توسط ما!</p>
                         </div>
-                        <h3>بازی تحت پوشش</h3>
-                        <p class="fun-number">۸۵ عدد</p>
-                        <p class="fun-description">بازی مختلف فقط توسط ما!</p>
+                        <div class="card-glow"></div>
                     </div>
                 </div>
             </div>
@@ -976,9 +236,11 @@
         <!-- بخش شبکه‌های اجتماعی -->
         <section id="social" class="social-section">
             <div class="container">
-                <h2 class="section-title">شبکه‌های اجتماعی</h2>
+                <div class="section-header">
+                    <h2 class="section-title">شبکه‌های اجتماعی</h2>
+                    <p class="section-subtitle">ما را در شبکه‌های اجتماعی دنبال کنید</p>
+                </div>
                 <div class="social-grid">
-                    <!-- اینستاگرام -->
                     <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fab fa-instagram"></i>
@@ -990,9 +252,9 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
 
-                    <!-- کانال تلگرام -->
                     <a href="https://t.me/BloodStrikeFarsi" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fab fa-telegram"></i>
@@ -1004,9 +266,9 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
 
-                    <!-- گروه تلگرام -->
                     <a href="https://t.me/BloodStrikeFarsy" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fab fa-telegram"></i>
@@ -1018,9 +280,9 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
 
-                    <!-- کانال روبیکا -->
                     <a href="https://rubika.ir/bloodstrikefarsi" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-comment"></i>
@@ -1032,9 +294,9 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
 
-                    <!-- گروه روبیکا -->
                     <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-users"></i>
@@ -1046,9 +308,9 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
 
-                    <!-- کانال بله -->
                     <a href="https://ble.ir/bloodstrikefarsi" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-comment-dots"></i>
@@ -1060,9 +322,9 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
 
-                    <!-- آپارات -->
                     <a href="https://www.aparat.com/Bloodstrike" class="social-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-play-circle"></i>
@@ -1074,46 +336,8 @@
                         <div class="social-arrow">
                             <i class="fas fa-arrow-left"></i>
                         </div>
+                        <div class="card-glow"></div>
                     </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش آمار و کاربران آنلاین -->
-        <section id="stats" class="stats-section">
-            <div class="container">
-                <h2 class="section-title">آمار سایت</h2>
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>بازدید کل</h3>
-                            <p id="totalVisits">۱۲,۸۵۰</p>
-                            <span>تعداد کل بازدیدهای سایت</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>کاربران فعال</h3>
-                            <p id="onlineUsers">۲۳۴</p>
-                            <span>کاربران فعال امروز</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>بازدید امروز</h3>
-                            <p id="todayVisits">۸۵</p>
-                            <span>بازدیدهای امروز</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -1123,26 +347,76 @@
             <div class="container">
                 <div class="about-content">
                     <div class="about-text">
-                        <h2 class="section-title">درباره ما</h2>
-                        <p>این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد. ما در اینجا بهترین و به‌روزترین اطلاعات درباره بازی BloodStrike و سایر بازی‌های محبوب را جمع‌آوری کرده‌ایم.</p>
+                        <div class="section-header">
+                            <h2 class="section-title">درباره ما</h2>
+                            <p class="section-subtitle">معرفی تیم و اهداف ما</p>
+                        </div>
+                        <p class="about-description">
+                            این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد. 
+                            ما در اینجا بهترین و به‌روزترین اطلاعات درباره بازی BloodStrike و سایر بازی‌های محبوب را جمع‌آوری کرده‌ایم.
+                        </p>
                         <div class="about-features">
                             <div class="feature">
-                                <i class="fas fa-sync-alt"></i>
-                                <span>آپدیت مداوم محتوا</span>
+                                <div class="feature-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>آپدیت مداوم</h4>
+                                    <p>محتوای همیشه به‌روز و جدید</p>
+                                </div>
                             </div>
                             <div class="feature">
-                                <i class="fas fa-users"></i>
-                                <span>جامعه فعال بازیکنان</span>
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>جامعه فعال</h4>
+                                    <p>بازیکنان فعال و پویا</p>
+                                </div>
                             </div>
                             <div class="feature">
-                                <i class="fas fa-headset"></i>
-                                <span>پشتیبانی آنلاین</span>
+                                <div class="feature-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>پشتیبانی آنلاین</h4>
+                                    <p>پاسخگویی سریع به سوالات</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="about-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-gamepad"></i>
+                    <div class="about-visual">
+                        <div class="visual-card">
+                            <div class="visual-content">
+                                <i class="fas fa-gamepad"></i>
+                                <h3>گیمینگ حرفه‌ای</h3>
+                                <p>با تجربه و تخصص</p>
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تماس با ما -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">تماس با ما</h2>
+                    <p class="section-subtitle">راه‌های ارتباطی با تیم ما</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>ایمیل</h3>
+                                <p>bloodstrikefarsi80@gmail.com</p>
+                            </div>
+                            <div class="card-glow"></div>
                         </div>
                     </div>
                 </div>
@@ -1155,24 +429,36 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>BloodStrike Farsi</h3>
-                    <p>مرجع تخصصی بازی‌های گیمینگ به زبان فارسی</p>
+                    <div class="footer-logo">
+                        <i class="fas fa-gamepad"></i>
+                        <span>BloodStrike Farsi</span>
+                    </div>
+                    <p class="footer-description">
+                        مرجع تخصصی بازی‌های گیمینگ به زبان فارسی با طراحی مدرن و سه بعدی
+                    </p>
                 </div>
                 <div class="footer-section">
                     <h4>لینک‌های سریع</h4>
-                    <ul>
+                    <ul class="footer-links">
                         <li><a href="#home">صفحه اصلی</a></li>
                         <li><a href="#games">بازی‌ها</a></li>
-                        <li><a href="#social">شبکه‌های اجتماعی</a></li>
-                        <li><a href="#stats">آمار سایت</a></li>
+                        <li><a href="#fun">آمار فان</a></li>
+                        <li><a href="#social">شبکه‌ها</a></li>
+                        <li><a href="#about">درباره ما</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>تماس با ما</h4>
+                    <h4>ارتباط با ما</h4>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="mailto:bloodstrikefarsi80@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:bloodstrikefarsi80@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1182,80 +468,6 @@
         </div>
     </footer>
 
-    <script>
-        // اسکریپت برای منوی هامبورگر و اسکرول نرم
-        document.addEventListener('DOMContentLoaded', function() {
-            // منوی هامبورگر
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            hamburger.addEventListener('click', function() {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-            
-            // بستن منو هنگام کلیک روی لینک
-            document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }));
-            
-            // اسکرول نرم برای لینک‌ها
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('.header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // افکت اسکرول برای هدر
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('.header');
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(15, 15, 26, 0.95)';
-                    header.style.backdropFilter = 'blur(25px)';
-                } else {
-                    header.style.background = 'rgba(15, 15, 26, 0.8)';
-                    header.style.backdropFilter = 'blur(20px)';
-                }
-            });
-            
-            // انیمیشن برای عناصر هنگام اسکرول
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0) translateZ(0)';
-                    }
-                });
-            }, observerOptions);
-            
-            // مشاهده عناصر برای انیمیشن
-            document.querySelectorAll('.game-card, .social-card, .fun-card, .stat-card, .about-text, .about-image').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px) translateZ(-20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
