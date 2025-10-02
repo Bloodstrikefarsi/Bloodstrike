@@ -1,98 +1,13 @@
-// اسکریپت کامل و بدون باگ
+// اسکریپت برای منوی هامبورگر و اسکرول نرم
 document.addEventListener('DOMContentLoaded', function() {
-    // اول کپچا را راه‌اندازی کن
-    initCaptcha();
-});
-
-// سیستم کپچا - کاملاً تست شده
-function initCaptcha() {
-    const botDetection = document.getElementById('botDetection');
-    const captchaCode = document.getElementById('captchaCode');
-    const captchaInput = document.getElementById('captchaInput');
-    const captchaSubmit = document.getElementById('captchaSubmit');
-    const captchaMessage = document.getElementById('captchaMessage');
+    // سیستم تشخیص ربات - باید اول اجرا شود
+    initBotDetection();
     
-    // بررسی اگر کپچا قبلاً حل شده باشد
+    // بقیه کدها فقط اگر کپچا حل شده باشد اجرا شوند
     if (localStorage.getItem('captchaSolved') === 'true') {
-        botDetection.style.display = 'none';
         initializeSite();
-        return;
     }
-    
-    // تولید کد تصادفی برای کپچا
-    function generateCaptcha() {
-        const chars = '0123456789';
-        let result = '';
-        for (let i = 0; i < 4; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
-    }
-    
-    let currentCaptcha = generateCaptcha();
-    
-    // نمایش کپچا
-    captchaCode.textContent = currentCaptcha;
-    botDetection.style.display = 'flex';
-    captchaMessage.style.display = 'none';
-    
-    // تابع برای بررسی کپچا
-    function checkCaptcha() {
-        const userInput = captchaInput.value.trim();
-        
-        if (userInput === '') {
-            showCaptchaMessage('لطفا کد را وارد کنید', 'error');
-            return false;
-        }
-        
-        if (userInput === currentCaptcha) {
-            // کپچا صحیح است
-            localStorage.setItem('captchaSolved', 'true');
-            botDetection.style.display = 'none';
-            showCaptchaMessage('', 'success');
-            initializeSite();
-            return true;
-        } else {
-            // کپچا نادرست است
-            showCaptchaMessage('کد وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
-            currentCaptcha = generateCaptcha();
-            captchaCode.textContent = currentCaptcha;
-            captchaInput.value = '';
-            captchaInput.focus();
-            return false;
-        }
-    }
-    
-    // رویداد کلیک روی دکمه تایید
-    captchaSubmit.addEventListener('click', function(e) {
-        e.preventDefault();
-        checkCaptcha();
-    });
-    
-    // امکان Enter برای تایید
-    captchaInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            checkCaptcha();
-        }
-    });
-    
-    // تابع نمایش پیام کپچا
-    function showCaptchaMessage(message, type) {
-        if (message) {
-            captchaMessage.textContent = message;
-            captchaMessage.className = `message ${type}`;
-            captchaMessage.style.display = 'block';
-        } else {
-            captchaMessage.style.display = 'none';
-        }
-    }
-    
-    // فوکوس روی فیلد ورودی
-    setTimeout(() => {
-        captchaInput.focus();
-    }, 100);
-}
+});
 
 // تابع اصلی برای راه‌اندازی سایت
 function initializeSite() {
@@ -195,6 +110,88 @@ function initializeSite() {
     
     // سیستم ساعت و تاریخ
     initDateTimeSystem();
+}
+
+// سیستم تشخیص ربات - با متن امنیتی ثابت
+function initBotDetection() {
+    const botDetection = document.getElementById('botDetection');
+    const captchaInput = document.getElementById('captchaInput');
+    const captchaSubmit = document.getElementById('captchaSubmit');
+    const captchaMessage = document.getElementById('captchaMessage');
+    
+    // بررسی اگر کپچا قبلاً حل شده باشد
+    if (localStorage.getItem('captchaSolved') === 'true') {
+        if (botDetection) botDetection.style.display = 'none';
+        initializeSite();
+        return;
+    }
+    
+    // اگر عناصر کپچا وجود ندارند، سایت را مستقیماً راه‌اندازی کن
+    if (!botDetection || !captchaInput || !captchaSubmit) {
+        console.error('عناصر کپچا پیدا نشدند');
+        initializeSite();
+        return;
+    }
+    
+    // متن امنیتی ثابت
+    const expectedText = 'bloodstrikefarsi';
+    
+    // نمایش کپچا
+    botDetection.style.display = 'flex';
+    captchaMessage.style.display = 'none';
+    
+    // تابع برای بررسی کپچا
+    function checkCaptcha() {
+        const userInput = captchaInput.value.trim().toLowerCase();
+        
+        if (userInput === '') {
+            showCaptchaMessage('لطفا کلمه را وارد کنید', 'error');
+            return false;
+        }
+        
+        if (userInput === expectedText) {
+            // کپچا صحیح است
+            localStorage.setItem('captchaSolved', 'true');
+            botDetection.style.display = 'none';
+            showCaptchaMessage('', 'success');
+            initializeSite();
+            return true;
+        } else {
+            // کپچا نادرست است
+            showCaptchaMessage('کلمه وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
+            captchaInput.value = '';
+            captchaInput.focus();
+            return false;
+        }
+    }
+    
+    // رویداد کلیک روی دکمه تایید
+    captchaSubmit.addEventListener('click', function(e) {
+        e.preventDefault();
+        checkCaptcha();
+    });
+    
+    // امکان Enter برای تایید
+    captchaInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkCaptcha();
+        }
+    });
+    
+    // تابع نمایش پیام کپچا
+    function showCaptchaMessage(message, type) {
+        if (message) {
+            captchaMessage.textContent = message;
+            captchaMessage.className = `message ${type}`;
+            captchaMessage.style.display = 'block';
+        } else {
+            captchaMessage.style.display = 'none';
+        }
+    }
+    
+    // فوکوس روی فیلد ورودی
+    captchaInput.focus();
 }
 
 // سیستم آمار بازدید و کاربران آنلاین
@@ -431,7 +428,7 @@ function initRegistrationSystem() {
             id: 'user_' + Date.now(),
             name: randomName,
             email: email,
-            password: password,
+            password: password, // در محیط واقعی باید هش شود
             createdAt: new Date().toISOString()
         };
         
@@ -517,7 +514,7 @@ function initAdvertisementSystem() {
     }, 60000);
 }
 
-// سیستم پنل مدیریت
+// سیستم پنل مدیریت - با رفع مشکل ایمیل
 function initAdminPanel() {
     const adminLoginLink = document.getElementById('adminLoginLink');
     const adminPanel = document.getElementById('adminPanel');
