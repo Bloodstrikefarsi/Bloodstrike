@@ -31,6 +31,139 @@ body {
     padding: 0 20px;
 }
 
+/* منوی همبرگر سمت چپ */
+.hamburger-menu-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+}
+
+.hamburger-btn {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--light-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn:hover span {
+    background-color: var(--primary-color);
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: var(--darker-color);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+    z-index: 1002;
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.side-menu-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.side-menu-header h3 {
+    color: var(--light-color);
+    margin: 0;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: var(--light-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+    color: var(--primary-color);
+}
+
+.side-menu-content {
+    padding: 1rem;
+}
+
+.side-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: var(--light-color);
+    text-decoration: none;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.side-menu-item:hover {
+    background: var(--glass-bg);
+    color: var(--primary-color);
+}
+
+.side-menu-item i {
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.side-menu-divider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: 1.5rem 0;
+}
+
+.quick-stats {
+    background: var(--glass-bg);
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid var(--glass-border);
+}
+
+.quick-stats h4 {
+    margin-bottom: 1rem;
+    color: var(--light-color);
+}
+
+.quick-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.quick-stat:last-child {
+    margin-bottom: 0;
+}
+
 /* تشخیص ربات */
 .bot-detection {
     position: fixed;
@@ -119,12 +252,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* ساعت و تاریخ در هدر */
-.datetime {
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
 /* هدر و نویگیشن */
 .header {
     position: fixed;
@@ -156,6 +283,13 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--light-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--primary-color);
+    transform: scale(1.05);
 }
 
 .logo i {
@@ -176,8 +310,7 @@ body {
     position: relative;
 }
 
-.nav-menu a:hover,
-.nav-menu a.active {
+.nav-menu a:hover {
     color: var(--primary-color);
 }
 
@@ -192,9 +325,13 @@ body {
     transition: width 0.3s ease;
 }
 
-.nav-menu a:hover::after,
-.nav-menu a.active::after {
+.nav-menu a:hover::after {
     width: 100%;
+}
+
+.datetime {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 .hamburger {
@@ -334,13 +471,13 @@ body {
 
 /* بخش اخبار */
 .news-section {
-    padding: 80px 0;
-    background: rgba(0, 0, 0, 0.2);
+    padding: 100px 0;
+    background: rgba(0, 0, 0, 0.3);
 }
 
-.news-container {
+.news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
@@ -348,31 +485,97 @@ body {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    padding: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: var(--glass-shadow);
 }
 
 .news-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.15);
 }
 
-.news-card h3 {
+.news-image {
+    height: 200px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-content h3 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
     color: var(--light-color);
 }
 
-.news-card p {
+.news-content p {
     margin-bottom: 1rem;
-    opacity: 0.9;
+    opacity: 0.8;
+    line-height: 1.6;
 }
 
-.news-card small {
+.news-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     opacity: 0.7;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+}
+
+/* بخش فروشگاه */
+.shop-section {
+    padding: 100px 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.shop-content {
+    text-align: center;
+}
+
+.shop-placeholder {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    box-shadow: var(--glass-shadow);
+}
+
+.shop-placeholder i {
+    font-size: 5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.shop-placeholder h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--light-color);
+}
+
+.shop-placeholder p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+.coming-soon {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    animation: pulse 2s infinite;
 }
 
 /* بخش بازی‌ها */
@@ -739,29 +942,10 @@ body {
 .register-section {
     padding: 80px 0;
     background: rgba(0, 0, 0, 0.3);
-    min-height: 100vh;
 }
 
 .register-form {
     max-width: 500px;
-    margin: 0 auto;
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: var(--glass-shadow);
-}
-
-/* بخش پیشنهادات */
-.suggestions-section {
-    padding: 80px 0;
-    background: rgba(0, 0, 0, 0.2);
-    min-height: 100vh;
-}
-
-.suggestions-form {
-    max-width: 600px;
     margin: 0 auto;
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
@@ -817,25 +1001,21 @@ body {
     border: 1px solid var(--accent-color);
 }
 
-/* بخش معرفی */
-.about-section {
+/* بخش پیشنهادات */
+.suggestions-section {
     padding: 80px 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.2);
 }
 
-.about-content {
+.suggestions-form {
+    max-width: 600px;
+    margin: 0 auto;
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: var(--glass-shadow);
-}
-
-.about-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    text-align: center;
 }
 
 /* بخش حمایت */
@@ -860,37 +1040,6 @@ body {
     font-size: 4rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
-}
-
-/* بخش تماس با ما */
-.contact-section {
-    padding: 80px 0;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.contact-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--glass-bg);
-    border-radius: 15px;
-    margin-bottom: 1rem;
-    border: 1px solid var(--glass-border);
-}
-
-.contact-item i {
-    font-size: 2rem;
-    color: var(--primary-color);
-}
-
-.contact-item h3 {
-    margin-bottom: 0.5rem;
 }
 
 /* تبلیغات */
@@ -1004,10 +1153,6 @@ body {
     border-bottom: none;
 }
 
-.admin-form {
-    margin-bottom: 1.5rem;
-}
-
 .admin-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1060,6 +1205,25 @@ body {
 
 .footer-section ul li a:hover {
     opacity: 1;
+}
+
+.footer-contact {
+    margin-top: 1rem;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--light-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    opacity: 1;
+    color: var(--primary-color);
 }
 
 .social-links {
@@ -1133,7 +1297,7 @@ body {
     .social-grid,
     .fun-grid,
     .stats-container,
-    .news-container {
+    .news-grid {
         grid-template-columns: 1fr;
     }
     
@@ -1143,6 +1307,10 @@ body {
     
     .admin-stats {
         grid-template-columns: 1fr;
+    }
+
+    .side-menu {
+        width: 280px;
     }
 }
 
@@ -1164,5 +1332,10 @@ body {
         left: 10px;
         right: 10px;
         max-width: none;
+    }
+
+    .hamburger-menu-left {
+        top: 15px;
+        left: 15px;
     }
 }
