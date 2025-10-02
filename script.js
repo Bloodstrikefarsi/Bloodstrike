@@ -115,6 +115,7 @@ function initializeSite() {
 // سیستم تشخیص ربات - با متن امنیتی ثابت
 function initBotDetection() {
     const botDetection = document.getElementById('botDetection');
+    const captchaCode = document.getElementById('captchaCode');
     const captchaInput = document.getElementById('captchaInput');
     const captchaSubmit = document.getElementById('captchaSubmit');
     const captchaMessage = document.getElementById('captchaMessage');
@@ -127,16 +128,17 @@ function initBotDetection() {
     }
     
     // اگر عناصر کپچا وجود ندارند، سایت را مستقیماً راه‌اندازی کن
-    if (!botDetection || !captchaInput || !captchaSubmit) {
+    if (!botDetection || !captchaCode || !captchaInput || !captchaSubmit) {
         console.error('عناصر کپچا پیدا نشدند');
         initializeSite();
         return;
     }
     
     // متن امنیتی ثابت
-    const expectedText = 'bloodstrikefarsi';
+    const securityText = 'bloodstrikefarsi';
     
     // نمایش کپچا
+    captchaCode.textContent = securityText;
     botDetection.style.display = 'flex';
     captchaMessage.style.display = 'none';
     
@@ -145,11 +147,11 @@ function initBotDetection() {
         const userInput = captchaInput.value.trim().toLowerCase();
         
         if (userInput === '') {
-            showCaptchaMessage('لطفا کلمه را وارد کنید', 'error');
+            showCaptchaMessage('لطفا متن امنیتی را وارد کنید', 'error');
             return false;
         }
         
-        if (userInput === expectedText) {
+        if (userInput === securityText) {
             // کپچا صحیح است
             localStorage.setItem('captchaSolved', 'true');
             botDetection.style.display = 'none';
@@ -158,7 +160,7 @@ function initBotDetection() {
             return true;
         } else {
             // کپچا نادرست است
-            showCaptchaMessage('کلمه وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
+            showCaptchaMessage('متن وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
             captchaInput.value = '';
             captchaInput.focus();
             return false;
@@ -191,7 +193,9 @@ function initBotDetection() {
     }
     
     // فوکوس روی فیلد ورودی
-    captchaInput.focus();
+    setTimeout(() => {
+        captchaInput.focus();
+    }, 100);
 }
 
 // سیستم آمار بازدید و کاربران آنلاین
