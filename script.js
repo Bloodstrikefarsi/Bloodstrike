@@ -1,22 +1,32 @@
 // اسکریپت برای منوی هامبورگر و اسکرول نرم
 document.addEventListener('DOMContentLoaded', function() {
-    // سیستم تشخیص ربات
+    // سیستم تشخیص ربات - باید اول اجرا شود
     initBotDetection();
     
+    // بقیه کدها فقط اگر کپچا حل شده باشد اجرا شوند
+    if (localStorage.getItem('captchaSolved') === 'true') {
+        initializeSite();
+    }
+});
+
+// تابع اصلی برای راه‌اندازی سایت
+function initializeSite() {
     // منوی هامبورگر
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-    
-    // بستن منو هنگام کلیک روی لینک
-    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    }));
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // بستن منو هنگام کلیک روی لینک
+        document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    }
     
     // اسکرول نرم برای لینک‌ها
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -42,12 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // افکت اسکرول برای هدر
     window.addEventListener('scroll', function() {
         const header = document.querySelector('.header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(28, 28, 30, 0.95)';
-            header.style.backdropFilter = 'blur(20px)';
-        } else {
-            header.style.background = 'rgba(28, 28, 30, 0.9)';
-            header.style.backdropFilter = 'blur(10px)';
+        if (header) {
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(28, 28, 30, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'rgba(28, 28, 30, 0.9)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
         }
     });
     
@@ -98,9 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // سیستم ساعت و تاریخ
     initDateTimeSystem();
-});
+}
 
-// سیستم تشخیص ربات - رفع مشکل
+// سیستم تشخیص ربات - کاملاً بازنویسی شده
 function initBotDetection() {
     const botDetection = document.getElementById('botDetection');
     const captchaCode = document.getElementById('captchaCode');
@@ -108,7 +120,19 @@ function initBotDetection() {
     const captchaSubmit = document.getElementById('captchaSubmit');
     const captchaMessage = document.getElementById('captchaMessage');
     
-    let currentCaptcha = '';
+    // بررسی اگر کپچا قبلاً حل شده باشد
+    if (localStorage.getItem('captchaSolved') === 'true') {
+        if (botDetection) botDetection.style.display = 'none';
+        initializeSite();
+        return;
+    }
+    
+    // اگر عناصر کپچا وجود ندارند، سایت را مستقیماً راه‌اندازی کن
+    if (!botDetection || !captchaCode || !captchaInput || !captchaSubmit) {
+        console.error('عناصر کپچا پیدا نشدند');
+        initializeSite();
+        return;
+    }
     
     // تولید کد تصادفی برای کپچا
     function generateCaptcha() {
@@ -120,17 +144,12 @@ function initBotDetection() {
         return result;
     }
     
-    // بررسی وضعیت کپچا در localStorage
-    const captchaSolved = localStorage.getItem('captchaSolved');
-    if (captchaSolved === 'true') {
-        botDetection.style.display = 'none';
-        return;
-    }
+    let currentCaptcha = generateCaptcha();
     
-    // نمایش کپچا و تنظیم کد اولیه
-    botDetection.style.display = 'flex';
-    currentCaptcha = generateCaptcha();
+    // نمایش کپچا
     captchaCode.textContent = currentCaptcha;
+    botDetection.style.display = 'flex';
+    captchaMessage.style.display = 'none';
     
     // تابع برای بررسی کپچا
     function checkCaptcha() {
@@ -138,7 +157,7 @@ function initBotDetection() {
         
         if (userInput === '') {
             showCaptchaMessage('لطفا کد را وارد کنید', 'error');
-            return;
+            return false;
         }
         
         if (userInput === currentCaptcha) {
@@ -146,6 +165,8 @@ function initBotDetection() {
             localStorage.setItem('captchaSolved', 'true');
             botDetection.style.display = 'none';
             showCaptchaMessage('', 'success');
+            initializeSite();
+            return true;
         } else {
             // کپچا نادرست است
             showCaptchaMessage('کد وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
@@ -153,15 +174,20 @@ function initBotDetection() {
             captchaCode.textContent = currentCaptcha;
             captchaInput.value = '';
             captchaInput.focus();
+            return false;
         }
     }
     
     // رویداد کلیک روی دکمه تایید
-    captchaSubmit.addEventListener('click', checkCaptcha);
+    captchaSubmit.addEventListener('click', function(e) {
+        e.preventDefault();
+        checkCaptcha();
+    });
     
     // امکان Enter برای تایید
     captchaInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
+            e.preventDefault();
             checkCaptcha();
         }
     });
@@ -176,6 +202,9 @@ function initBotDetection() {
             captchaMessage.style.display = 'none';
         }
     }
+    
+    // فوکوس روی فیلد ورودی
+    captchaInput.focus();
 }
 
 // سیستم آمار بازدید و کاربران آنلاین
@@ -379,6 +408,8 @@ function initRegistrationSystem() {
     const userPassword = document.getElementById('userPassword');
     const registerMessage = document.getElementById('registerMessage');
     
+    if (!registerBtn || !userEmail || !userPassword) return;
+    
     registerBtn.addEventListener('click', function() {
         const email = userEmail.value.trim();
         const password = userPassword.value.trim();
@@ -437,6 +468,8 @@ function initSuggestionsSystem() {
     const suggestionText = document.getElementById('suggestionText');
     const suggestionMessage = document.getElementById('suggestionMessage');
     
+    if (!submitSuggestion || !suggestionText) return;
+    
     submitSuggestion.addEventListener('click', function() {
         const text = suggestionText.value.trim();
         
@@ -476,6 +509,8 @@ function initAdvertisementSystem() {
     const advertisement = document.getElementById('advertisement');
     const adClose = document.getElementById('adClose');
     
+    if (!advertisement || !adClose) return;
+    
     // نمایش تبلیغ پس از 30 ثانیه
     setTimeout(() => {
         advertisement.style.display = 'block';
@@ -503,6 +538,8 @@ function initAdminPanel() {
     const adminPassword = document.getElementById('adminPassword');
     const adminMessage = document.getElementById('adminMessage');
     const adminContent = document.getElementById('adminContent');
+    
+    if (!adminLoginLink || !adminPanel) return;
     
     // باز کردن پنل مدیریت
     adminLoginLink.addEventListener('click', function(e) {
@@ -613,7 +650,10 @@ function initDateTimeSystem() {
         };
         
         const persianDate = now.toLocaleDateString('fa-IR', options);
-        document.getElementById('datetime').textContent = persianDate;
+        const datetimeElement = document.getElementById('datetime');
+        if (datetimeElement) {
+            datetimeElement.textContent = persianDate;
+        }
     }
     
     // به‌روزرسانی هر ثانیه
@@ -623,6 +663,8 @@ function initDateTimeSystem() {
 
 // تابع کمکی برای نمایش پیام
 function showMessage(element, message, type) {
+    if (!element) return;
+    
     element.textContent = message;
     element.className = `message ${type}`;
     element.style.display = 'block';
