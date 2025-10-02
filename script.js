@@ -100,16 +100,19 @@ document.addEventListener('DOMContentLoaded', function() {
     initDateTimeSystem();
 });
 
-// سیستم تشخیص ربات
+// سیستم تشخیص ربات - رفع مشکل
 function initBotDetection() {
     const botDetection = document.getElementById('botDetection');
     const captchaCode = document.getElementById('captchaCode');
     const captchaInput = document.getElementById('captchaInput');
     const captchaSubmit = document.getElementById('captchaSubmit');
+    const captchaMessage = document.getElementById('captchaMessage');
+    
+    let currentCaptcha = '';
     
     // تولید کد تصادفی برای کپچا
     function generateCaptcha() {
-        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const chars = '0123456789';
         let result = '';
         for (let i = 0; i < 4; i++) {
             result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -121,29 +124,57 @@ function initBotDetection() {
     const captchaSolved = localStorage.getItem('captchaSolved');
     if (captchaSolved === 'true') {
         botDetection.style.display = 'none';
-    } else {
-        botDetection.style.display = 'flex';
-        const captcha = generateCaptcha();
-        captchaCode.textContent = captcha;
+        return;
+    }
+    
+    // نمایش کپچا و تنظیم کد اولیه
+    botDetection.style.display = 'flex';
+    currentCaptcha = generateCaptcha();
+    captchaCode.textContent = currentCaptcha;
+    
+    // تابع برای بررسی کپچا
+    function checkCaptcha() {
+        const userInput = captchaInput.value.trim();
         
-        captchaSubmit.addEventListener('click', function() {
-            if (captchaInput.value.toUpperCase() === captcha) {
-                localStorage.setItem('captchaSolved', 'true');
-                botDetection.style.display = 'none';
-            } else {
-                alert('کد وارد شده صحیح نیست. لطفا دوباره تلاش کنید.');
-                const newCaptcha = generateCaptcha();
-                captchaCode.textContent = newCaptcha;
-                captchaInput.value = '';
-            }
-        });
+        if (userInput === '') {
+            showCaptchaMessage('لطفا کد را وارد کنید', 'error');
+            return;
+        }
         
-        // امکان Enter برای تایید
-        captchaInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                captchaSubmit.click();
-            }
-        });
+        if (userInput === currentCaptcha) {
+            // کپچا صحیح است
+            localStorage.setItem('captchaSolved', 'true');
+            botDetection.style.display = 'none';
+            showCaptchaMessage('', 'success');
+        } else {
+            // کپچا نادرست است
+            showCaptchaMessage('کد وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
+            currentCaptcha = generateCaptcha();
+            captchaCode.textContent = currentCaptcha;
+            captchaInput.value = '';
+            captchaInput.focus();
+        }
+    }
+    
+    // رویداد کلیک روی دکمه تایید
+    captchaSubmit.addEventListener('click', checkCaptcha);
+    
+    // امکان Enter برای تایید
+    captchaInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkCaptcha();
+        }
+    });
+    
+    // تابع نمایش پیام کپچا
+    function showCaptchaMessage(message, type) {
+        if (message) {
+            captchaMessage.textContent = message;
+            captchaMessage.className = `message ${type}`;
+            captchaMessage.style.display = 'block';
+        } else {
+            captchaMessage.style.display = 'none';
+        }
     }
 }
 
@@ -469,4 +500,148 @@ function initAdminPanel() {
     const adminClose = document.getElementById('adminClose');
     const adminLogout = document.getElementById('adminLogout');
     const adminEmail = document.getElementById('adminEmail');
-    const adminPassword = document.getElementById('
+    const adminPassword = document.getElementById('adminPassword');
+    const adminMessage = document.getElementById('adminMessage');
+    const adminContent = document.getElementById('adminContent');
+    
+    // باز کردن پنل مدیریت
+    adminLoginLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        adminPanel.style.display = 'flex';
+    });
+    
+    // بستن پنل مدیریت
+    adminClose.addEventListener('click', function() {
+        adminPanel.style.display = 'none';
+    });
+    
+    // ورود به پنل مدیریت
+    adminLoginBtn.addEventListener('click', function() {
+        const email = adminEmail.value.trim();
+        const password = adminPassword.value.trim();
+        
+        if (email === 'bloodstrikefarsi80@gmail.com' && password === 'SALAMISH85@') {
+            // نمایش بخش مدیریت
+            document.querySelector('.admin-login').style.display = 'none';
+            adminContent.style.display = 'block';
+            
+            // بارگذاری داده‌ها
+            loadAdminData();
+        } else {
+            showMessage(adminMessage, 'ایمیل یا رمز عبور اشتباه است.', 'error');
+        }
+    });
+    
+    // خروج از پنل مدیریت
+    adminLogout.addEventListener('click', function() {
+        adminContent.style.display = 'none';
+        document.querySelector('.admin-login').style.display = 'block';
+        adminPanel.style.display = 'none';
+        adminEmail.value = '';
+        adminPassword.value = '';
+        adminMessage.textContent = '';
+    });
+}
+
+// بارگذاری داده‌ها در پنل مدیریت
+function loadAdminData() {
+    // بارگذاری آمار
+    const visitData = JSON.parse(localStorage.getItem('bloodstrike_visits') || '{}');
+    document.getElementById('adminTotalVisits').textContent = visitData.totalVisits || 0;
+    document.getElementById('adminTodayVisits').textContent = visitData.todayVisits || 0;
+    
+    // بارگذاری کاربران
+    const users = JSON.parse(localStorage.getItem('bloodstrike_users') || '[]');
+    document.getElementById('adminUserCount').textContent = users.length;
+    
+    const usersList = document.getElementById('usersList');
+    usersList.innerHTML = '';
+    
+    if (users.length === 0) {
+        usersList.innerHTML = '<p>هیچ کاربری ثبت‌نام نکرده است.</p>';
+    } else {
+        users.forEach(user => {
+            const userElement = document.createElement('div');
+            userElement.className = 'admin-list-item';
+            userElement.innerHTML = `
+                <div>
+                    <strong>${user.name}</strong>
+                    <br>
+                    <small>${user.email}</small>
+                </div>
+                <small>${new Date(user.createdAt).toLocaleDateString('fa-IR')}</small>
+            `;
+            usersList.appendChild(userElement);
+        });
+    }
+    
+    // بارگذاری پیشنهادات
+    const suggestions = JSON.parse(localStorage.getItem('bloodstrike_suggestions') || '[]');
+    const suggestionsList = document.getElementById('suggestionsList');
+    suggestionsList.innerHTML = '';
+    
+    if (suggestions.length === 0) {
+        suggestionsList.innerHTML = '<p>هیچ پیشنهادی ثبت نشده است.</p>';
+    } else {
+        suggestions.forEach(suggestion => {
+            const suggestionElement = document.createElement('div');
+            suggestionElement.className = 'admin-list-item';
+            suggestionElement.innerHTML = `
+                <div>
+                    <strong>${suggestion.userName}</strong>
+                    <p>${suggestion.text}</p>
+                </div>
+                <small>${new Date(suggestion.createdAt).toLocaleDateString('fa-IR')}</small>
+            `;
+            suggestionsList.appendChild(suggestionElement);
+        });
+    }
+}
+
+// سیستم ساعت و تاریخ
+function initDateTimeSystem() {
+    function updateDateTime() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        
+        const persianDate = now.toLocaleDateString('fa-IR', options);
+        document.getElementById('datetime').textContent = persianDate;
+    }
+    
+    // به‌روزرسانی هر ثانیه
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+}
+
+// تابع کمکی برای نمایش پیام
+function showMessage(element, message, type) {
+    element.textContent = message;
+    element.className = `message ${type}`;
+    element.style.display = 'block';
+    
+    // پنهان کردن خودکار پیام پس از 5 ثانیه
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 5000);
+}
+
+// تابع کمکی برای بررسی ایمیل
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// تابع کمکی برای تولید نام تصادفی
+function generateRandomName() {
+    const names = ['شاهین', 'رها', 'کامران', 'نازنین', 'پرهام', 'یاسمن', 'آرمان', 'ستایش', 'کیان', 'النا'];
+    const surnames = ['محمدی', 'رضایی', 'کریمی', 'حسینی', 'جعفری', 'موسوی', 'قاسمی', 'اکبری', 'امیری', 'مرادی'];
+    return `${names[Math.floor(Math.random() * names.length)]} ${surnames[Math.floor(Math.random() * surnames.length)]}`;
+}
