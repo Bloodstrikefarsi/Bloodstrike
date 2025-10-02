@@ -1,2 +1,0 @@
-# Bloodstrike
-Telegram: Bloodstrikefarsi 
