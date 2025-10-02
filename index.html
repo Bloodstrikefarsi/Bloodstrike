@@ -23,27 +23,81 @@
         </div>
     </div>
 
+    <!-- منوی همبرگر سمت چپ -->
+    <div class="hamburger-menu-left">
+        <div class="hamburger-btn" id="leftHamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="side-menu" id="sideMenu">
+            <div class="side-menu-header">
+                <h3>منوی مدیریت</h3>
+                <button class="close-menu" id="closeMenu">&times;</button>
+            </div>
+            <div class="side-menu-content">
+                <a href="#home" class="side-menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>صفحه اصلی</span>
+                </a>
+                <a href="#news" class="side-menu-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>اخبار</span>
+                </a>
+                <a href="#shop" class="side-menu-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>فروشگاه</span>
+                </a>
+                <a href="#games" class="side-menu-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>بازی‌ها</span>
+                </a>
+                <a href="#stats" class="side-menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>آمار سایت</span>
+                </a>
+                <a href="#" class="side-menu-item" id="adminSideLink">
+                    <i class="fas fa-cog"></i>
+                    <span>پنل مدیریت</span>
+                </a>
+                <div class="side-menu-divider"></div>
+                <div class="quick-stats">
+                    <h4>آمار سریع</h4>
+                    <div class="quick-stat">
+                        <span>کاربران آنلاین:</span>
+                        <strong id="sideOnlineUsers">0</strong>
+                    </div>
+                    <div class="quick-stat">
+                        <span>بازدید امروز:</span>
+                        <strong id="sideTodayVisits">0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- هدر سایت -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
-                <div class="logo">
+                <a href="#home" class="logo">
                     <i class="fas fa-gamepad"></i>
                     <span>BloodStrike Farsi</span>
-                </div>
+                </a>
                 <div class="datetime" id="datetime">
                     <!-- ساعت و تاریخ اینجا نمایش داده می‌شود -->
                 </div>
                 <ul class="nav-menu">
                     <li><a href="#home">صفحه اصلی</a></li>
+                    <li><a href="#news">اخبار</a></li>
+                    <li><a href="#shop">فروشگاه</a></li>
                     <li><a href="#games">بازی‌ها</a></li>
                     <li><a href="#social">شبکه‌های اجتماعی</a></li>
                     <li><a href="#fun">آمار فان</a></li>
                     <li><a href="#stats">آمار سایت</a></li>
+                    <li><a href="#register">ثبت نام</a></li>
                     <li><a href="#suggestions">پیشنهادات</a></li>
                     <li><a href="#donate">حمایت</a></li>
-                    <li><a href="#contact">تماس با ما</a></li>
-                    <li><a href="#" id="adminLoginLink">پنل مدیریت</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -63,13 +117,78 @@
                 <p class="hero-description">مرجع تخصصی بازی BloodStrike و سایر بازی‌های محبوب</p>
                 <div class="hero-buttons">
                     <a href="#games" class="btn btn-primary">مشاهده بازی‌ها</a>
-                    <a href="#social" class="btn btn-secondary">پیوستن به جامعه</a>
+                    <a href="#news" class="btn btn-secondary">آخرین اخبار</a>
                 </div>
             </div>
             <div class="hero-background">
                 <div class="floating-element el1"></div>
                 <div class="floating-element el2"></div>
                 <div class="floating-element el3"></div>
+            </div>
+        </section>
+
+        <!-- بخش اخبار -->
+        <section id="news" class="news-section">
+            <div class="container">
+                <h2 class="section-title">آخرین اخبار</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-image">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="news-content">
+                            <h3>به زودی...</h3>
+                            <p>این بخش به زودی با آخرین اخبار و به‌روزرسانی‌ها پر خواهد شد.</p>
+                            <div class="news-date">
+                                <i class="far fa-calendar"></i>
+                                <span>به زودی</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="news-content">
+                            <h3>در حال توسعه</h3>
+                            <p>ما در حال آماده‌سازی محتوای جذاب برای این بخش هستیم.</p>
+                            <div class="news-date">
+                                <i class="far fa-calendar"></i>
+                                <span>به زودی</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="news-content">
+                            <h3>بروزرسانی آینده</h3>
+                            <p>این بخش به زودی با مطالب تازه و جذاب به‌روز خواهد شد.</p>
+                            <div class="news-date">
+                                <i class="far fa-calendar"></i>
+                                <span>به زودی</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش فروشگاه -->
+        <section id="shop" class="shop-section">
+            <div class="container">
+                <h2 class="section-title">فروشگاه</h2>
+                <div class="shop-content">
+                    <div class="shop-placeholder">
+                        <i class="fas fa-store"></i>
+                        <h3>فروشگاه به زودی راه‌اندازی می‌شود</h3>
+                        <p>ما در حال آماده‌سازی محصولات و خدمات ویژه برای شما هستیم</p>
+                        <div class="coming-soon">
+                            <span>به زودی</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -299,6 +418,33 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- نمایش لیست کاربران آنلاین -->
+                <div class="online-users-section">
+                    <h3 class="subsection-title">کاربران آنلاین در حال حاضر</h3>
+                    <div class="online-users-list" id="onlineUsersList">
+                        <!-- لیست کاربران به صورت داینامیک پر می‌شود -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ثبت نام -->
+        <section id="register" class="register-section">
+            <div class="container">
+                <h2 class="section-title">ساخت حساب کاربری</h2>
+                <div class="register-form">
+                    <div class="form-group">
+                        <label for="userEmail">ایمیل:</label>
+                        <input type="email" id="userEmail" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">رمز عبور:</label>
+                        <input type="password" id="userPassword" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                    <button id="registerBtn" class="btn btn-primary">ساخت حساب کاربری</button>
+                    <div id="registerMessage" class="message"></div>
+                </div>
             </div>
         </section>
 
@@ -330,24 +476,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- بخش تماس با ما -->
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <h2 class="section-title">تماس با ما</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h3>ایمیل</h3>
-                                <p>bloodstrikefarsi80@gmail.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- تبلیغات -->
@@ -366,11 +494,11 @@
             <h2>ورود به پنل مدیریت</h2>
             <div class="form-group">
                 <label for="adminEmail">ایمیل:</label>
-                <input type="email" id="adminEmail" placeholder="ایمیل خود را وارد کنید" autocomplete="off">
+                <input type="email" id="adminEmail" placeholder="bloodstrikefarsi80@gmail.com">
             </div>
             <div class="form-group">
                 <label for="adminPassword">رمز عبور:</label>
-                <input type="password" id="adminPassword" placeholder="رمز عبور خود را وارد کنید" autocomplete="off">
+                <input type="password" id="adminPassword" placeholder="رمز عبور">
             </div>
             <button id="adminLoginBtn" class="btn btn-primary">ورود به پنل</button>
             <button id="adminClose" class="btn btn-secondary">بستن</button>
@@ -384,6 +512,13 @@
             </div>
             
             <div class="admin-sections">
+                <div class="admin-section">
+                    <h3>مدیریت کاربران</h3>
+                    <div id="usersList" class="admin-list">
+                        <!-- لیست کاربران -->
+                    </div>
+                </div>
+                
                 <div class="admin-section">
                     <h3>پیشنهادات کاربران</h3>
                     <div id="suggestionsList" class="admin-list">
@@ -403,8 +538,8 @@
                             <strong id="adminTodayVisits">0</strong>
                         </div>
                         <div class="admin-stat">
-                            <span>کاربران آنلاین:</span>
-                            <strong id="adminOnlineUsers">0</strong>
+                            <span>کاربران ثبت‌نام شده:</span>
+                            <strong id="adminUserCount">0</strong>
                         </div>
                     </div>
                 </div>
@@ -419,24 +554,31 @@
                 <div class="footer-section">
                     <h3>BloodStrike Farsi</h3>
                     <p>مرجع تخصصی بازی‌های گیمینگ به زبان فارسی</p>
+                    <div class="footer-contact">
+                        <a href="mailto:bloodstrikefarsi80@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            bloodstrikefarsi80@gmail.com
+                        </a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>لینک‌های سریع</h4>
                     <ul>
                         <li><a href="#home">صفحه اصلی</a></li>
+                        <li><a href="#news">اخبار</a></li>
+                        <li><a href="#shop">فروشگاه</a></li>
                         <li><a href="#games">بازی‌ها</a></li>
                         <li><a href="#social">شبکه‌های اجتماعی</a></li>
-                        <li><a href="#stats">آمار سایت</a></li>
-                        <li><a href="#suggestions">پیشنهادات</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>تماس با ما</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="mailto:bloodstrikefarsi80@gmail.com"><i class="fas fa-envelope"></i></a>
-                    </div>
+                    <h4>خدمات</h4>
+                    <ul>
+                        <li><a href="#register">ثبت نام</a></li>
+                        <li><a href="#suggestions">پیشنهادات</a></li>
+                        <li><a href="#donate">حمایت</a></li>
+                        <li><a href="#stats">آمار سایت</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -446,5 +588,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="advanced.js"></script>
 </body>
 </html>
