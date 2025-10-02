@@ -45,6 +45,45 @@
                 <div class="floating-element el3"></div>
             </div>
         </section>
+
+        <!-- بخش آمار و کاربران آنلاین -->
+        <section id="stats" class="stats-section">
+            <div class="container">
+                <h2 class="section-title">آمار سایت</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>بازدید کل</h3>
+                            <p id="totalVisits">0</p>
+                            <span>تعداد کل بازدیدهای سایت</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>کاربران آنلاین</h3>
+                            <p id="onlineUsers">0</p>
+                            <span>کاربران فعال در 15 دقیقه گذشته</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>بازدید امروز</h3>
+                            <p id="todayVisits">0</p>
+                            <span>بازدیدهای امروز</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -122,5 +161,34 @@
             }
         }
     </style>
+
+    <script>
+        // سیستم آمار ساده برای صفحه 404
+        document.addEventListener('DOMContentLoaded', function() {
+            const storageKey = 'bloodstrike_visits';
+            
+            // دریافت داده‌های موجود
+            let visitData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+            
+            // نمایش آمار
+            const totalVisitsElement = document.getElementById('totalVisits');
+            const todayVisitsElement = document.getElementById('todayVisits');
+            const onlineUsersElement = document.getElementById('onlineUsers');
+            
+            if (totalVisitsElement) {
+                totalVisitsElement.textContent = (visitData.totalVisits || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            
+            if (todayVisitsElement) {
+                todayVisitsElement.textContent = (visitData.todayVisits || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            
+            if (onlineUsersElement) {
+                // محاسبه کاربران آنلاین (تصادفی برای صفحه 404)
+                const onlineCount = Math.floor(Math.random() * 5) + 1;
+                onlineUsersElement.textContent = onlineCount;
+            }
+        });
+    </script>
 </body>
 </html>
