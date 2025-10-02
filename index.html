@@ -14,8 +14,9 @@
         <div class="captcha-container">
             <h2>لطفا ثابت کنید که ربات نیستید</h2>
             <div class="captcha-challenge">
-                <p>لطفا کلمه <strong>bloodstrikefarsi</strong> را در کادر زیر وارد کنید:</p>
-                <input type="text" id="captchaInput" placeholder="کلمه بالا را وارد کنید" autocomplete="off">
+                <p>عدد زیر را در کادر وارد کنید:</p>
+                <div class="captcha-code" id="captchaCode"></div>
+                <input type="text" id="captchaInput" placeholder="عدد بالا را وارد کنید" autocomplete="off">
                 <button id="captchaSubmit">تایید</button>
                 <div id="captchaMessage" class="message"></div>
             </div>
@@ -39,7 +40,6 @@
                     <li><a href="#social">شبکه‌های اجتماعی</a></li>
                     <li><a href="#fun">آمار فان</a></li>
                     <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#register">ثبت نام</a></li>
                     <li><a href="#suggestions">پیشنهادات</a></li>
                     <li><a href="#donate">حمایت</a></li>
                     <li><a href="#contact">تماس با ما</a></li>
@@ -299,33 +299,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- نمایش لیست کاربران آنلاین -->
-                <div class="online-users-section">
-                    <h3 class="subsection-title">کاربران آنلاین در حال حاضر</h3>
-                    <div class="online-users-list" id="onlineUsersList">
-                        <!-- لیست کاربران به صورت داینامیک پر می‌شود -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش ثبت نام -->
-        <section id="register" class="register-section">
-            <div class="container">
-                <h2 class="section-title">ساخت حساب کاربری</h2>
-                <div class="register-form">
-                    <div class="form-group">
-                        <label for="userEmail">ایمیل:</label>
-                        <input type="email" id="userEmail" placeholder="example@gmail.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userPassword">رمز عبور:</label>
-                        <input type="password" id="userPassword" placeholder="رمز عبور خود را وارد کنید" required>
-                    </div>
-                    <button id="registerBtn" class="btn btn-primary">ساخت حساب کاربری</button>
-                    <div id="registerMessage" class="message"></div>
-                </div>
             </div>
         </section>
 
@@ -412,13 +385,6 @@
             
             <div class="admin-sections">
                 <div class="admin-section">
-                    <h3>مدیریت کاربران</h3>
-                    <div id="usersList" class="admin-list">
-                        <!-- لیست کاربران -->
-                    </div>
-                </div>
-                
-                <div class="admin-section">
                     <h3>پیشنهادات کاربران</h3>
                     <div id="suggestionsList" class="admin-list">
                         <!-- لیست پیشنهادات -->
@@ -437,8 +403,8 @@
                             <strong id="adminTodayVisits">0</strong>
                         </div>
                         <div class="admin-stat">
-                            <span>کاربران ثبت‌نام شده:</span>
-                            <strong id="adminUserCount">0</strong>
+                            <span>کاربران آنلاین:</span>
+                            <strong id="adminOnlineUsers">0</strong>
                         </div>
                     </div>
                 </div>
@@ -461,7 +427,7 @@
                         <li><a href="#games">بازی‌ها</a></li>
                         <li><a href="#social">شبکه‌های اجتماعی</a></li>
                         <li><a href="#stats">آمار سایت</a></li>
-                        <li><a href="#register">ثبت نام</a></li>
+                        <li><a href="#suggestions">پیشنهادات</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
