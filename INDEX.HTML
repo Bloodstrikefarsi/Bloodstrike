@@ -1,94 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bloodstrike Farsi</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-
-    body {
-      margin: 0;
-      font-family: 'Vazirmatn', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #111, #222);
-      color: #fff;
-    }
-    header {
-      background: #ff0000;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    nav {
-      margin-top: 10px;
-    }
-    nav a {
-      margin: 0 10px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      color: #ff4444;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-    .btn {
-      display: inline-block;
-      background: #ff0000;
-      color: #fff;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #cc0000;
-      transform: scale(1.05);
-    }
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 15px;
-      margin-top: 50px;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>سایت گیمینگ من</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>🔥 Bloodstrike Farsi 🔥</h1>
-    <nav>
-      <a href="#">خانه</a>
-      <a href="#">درباره</a>
-      <a href="#">تماس</a>
-    </nav>
+  <!-- هدر و منو -->
+  <header class="site-header">
+    <div class="container">
+      <h1>کانال و پیج گیمینگ من</h1>
+      <nav>
+        <ul class="menu">
+          <li><a href="#home">خانه</a></li>
+          <li><a href="#games">بازی‌ها</a></li>
+          <li><a href="#social">شبکه‌ها</a></li>
+          <li><a href="#about">درباره ما</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>به Bloodstrike فارسی خوش آمدید</h2>
-    <p>اینجا مرجع فارسی بازی Bloodstrike هست. اخبار، آموزش‌ها و مطالب جذاب رو می‌تونی اینجا پیدا کنی.</p>
-    <a href="#" class="btn">بیشتر بدانید</a>
+  <!-- بخش Hero -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h2>به دنیای گیمینگ ما خوش آمدید!</h2>
+      <p>جدیدترین و جذاب‌ترین محتواهای گیمینگ را اینجا ببینید.</p>
+      <a class="btn" href="#social">دنبال کنید</a>
+    </div>
   </section>
 
-  <footer>
-    <p>© 2025 Bloodstrike Farsi - تمامی حقوق محفوظ است.</p>
+  <!-- بخش بازی‌ها -->
+  <section id="games" class="features">
+    <div class="container">
+      <h2>محبوب‌ترین بازی‌ها</h2>
+      <div class="card">بازی ۱</div>
+      <div class="card">بازی ۲</div>
+      <div class="card">بازی ۳</div>
+    </div>
+  </section>
+
+  <!-- بخش شبکه‌های اجتماعی -->
+  <section id="social" class="contact">
+    <div class="container">
+      <h2>شبکه‌های اجتماعی</h2>
+      <p>کانال یوتیوب: <a href="https://youtube.com/yourchannel">اینجا</a></p>
+      <p>پیج اینستاگرام: <a href="https://instagram.com/yourpage">اینجا</a></p>
+    </div>
+  </section>
+
+  <!-- درباره ما -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2>درباره ما</h2>
+      <p>این سایت برای معرفی کانال و پیج گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد.</p>
+    </div>
+  </section>
+
+  <!-- فوتر -->
+  <footer class="site-footer">
+    <div class="container">© کپی‌رایت — سایت گیمینگ من</div>
   </footer>
 </body>
 </html>
