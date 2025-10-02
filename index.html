@@ -4,100 +4,862 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloodStrike Farsi - مرجع گیمینگ فارسی</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff2d55;
+            --secondary: #5856d6;
+            --accent: #ff3b30;
+            --dark: #0f0f1a;
+            --darker: #070711;
+            --light: #f2f2f7;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            perspective: 1000px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transform-style: preserve-3d;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+            transform: translateZ(20px);
+        }
+
+        .logo i {
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* بخش اصلی */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+            transform-style: preserve-3d;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            transform: translateZ(50px);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-description {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            transform: translateZ(30px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            transform: translateZ(40px);
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: inline-block;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.4);
+            transform: translateZ(20px);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            transform: translateY(-5px) translateZ(30px);
+            box-shadow: 0 15px 40px rgba(255, 45, 85, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--glass-border);
+            transform: translateZ(20px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass);
+            transform: translateY(-5px) translateZ(30px);
+            border-color: var(--primary);
+        }
+
+        /* عناصر سه‌بعدی در پس‌زمینه */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        .floating-element.el1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            transform: translateZ(-100px);
+        }
+
+        .floating-element.el2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+            transform: translateZ(-50px);
+        }
+
+        .floating-element.el3 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+            transform: translateZ(-80px);
+        }
+
+        /* بخش بازی‌ها */
+        .games-section {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            transform: translateZ(40px);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            transform-style: preserve-3d;
+        }
+
+        .game-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            box-shadow: var(--glass-shadow);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg) translateZ(20px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transform: translateZ(30px);
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+        }
+
+        .game-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            transform: translateZ(20px);
+        }
+
+        .game-card p {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            transform: translateZ(15px);
+        }
+
+        .game-rating {
+            color: #ffd700;
+            font-size: 1.3rem;
+            transform: translateZ(10px);
+        }
+
+        /* بخش شبکه‌های اجتماعی */
+        .social-section {
+            padding: 100px 0;
+            transform-style: preserve-3d;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            transform-style: preserve-3d;
+        }
+
+        .social-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            color: var(--light);
+            transition: all 0.5s ease;
+            box-shadow: var(--glass-shadow);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .social-card:hover::before {
+            left: 100%;
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px) rotateX(3deg) rotateY(-3deg) translateZ(15px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            transform: translateZ(25px);
+            box-shadow: 0 8px 25px rgba(255, 45, 85, 0.3);
+        }
+
+        .social-content {
+            flex: 1;
+            transform: translateZ(20px);
+        }
+
+        .social-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .social-content p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .social-arrow {
+            opacity: 0;
+            transform: translateX(-15px) translateZ(10px);
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover .social-arrow {
+            opacity: 1;
+            transform: translateX(0) translateZ(15px);
+        }
+
+        /* بخش درباره ما */
+        .about-section {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            transform-style: preserve-3d;
+        }
+
+        .about-text {
+            transform: translateZ(30px);
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            transform: translateZ(20px);
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transform: translateZ(25px);
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.2rem;
+            background: var(--glass);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px) translateZ(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transform: translateZ(15px);
+        }
+
+        .about-image {
+            display: flex;
+            justify-content: center;
+            transform: translateZ(40px);
+        }
+
+        .image-placeholder {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            opacity: 0.8;
+            animation: pulse 2s ease-in-out infinite alternate;
+            box-shadow: 0 15px 40px rgba(255, 45, 85, 0.3);
+            transform-style: preserve-3d;
+        }
+
+        /* بخش آمار */
+        .stats-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            transform-style: preserve-3d;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            box-shadow: var(--glass-shadow);
+            transform-style: preserve-3d;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) rotateX(5deg) translateZ(15px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            transform: translateZ(25px);
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+        }
+
+        .stat-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+            transform: translateZ(20px);
+        }
+
+        .stat-content p {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: translateZ(15px);
+        }
+
+        .stat-content span {
+            opacity: 0.8;
+            font-size: 1rem;
+            transform: translateZ(10px);
+        }
+
+        /* بخش فان */
+        .fun-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .fun-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            transform-style: preserve-3d;
+        }
+
+        .fun-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            box-shadow: var(--glass-shadow);
+            transform-style: preserve-3d;
+        }
+
+        .fun-card:hover {
+            transform: translateY(-10px) rotateX(5deg) translateZ(15px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .fun-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            transform: translateZ(25px);
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+        }
+
+        .fun-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+            transform: translateZ(20px);
+        }
+
+        .fun-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: translateZ(15px);
+        }
+
+        .fun-description {
+            opacity: 0.8;
+            font-size: 1rem;
+            transform: translateZ(10px);
+        }
+
+        /* فوتر */
+        .footer {
+            background: var(--darker);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid var(--glass-border);
+            transform-style: preserve-3d;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+            transform: translateZ(20px);
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1.2rem;
+            color: var(--light);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--glass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--light);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px) translateZ(10px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            opacity: 0.7;
+            transform: translateZ(10px);
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) translateZ(0); 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg) translateZ(10px); 
+            }
+        }
+
+        @keyframes pulse {
+            from { 
+                transform: scale(1) translateZ(0); 
+            }
+            to { 
+                transform: scale(1.05) translateZ(10px); 
+            }
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                border-top: 1px solid var(--glass-border);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-description {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .games-grid,
+            .social-grid,
+            .fun-grid,
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- تشخیص ربات -->
-    <div id="botDetection" class="bot-detection">
-        <div class="captcha-container">
-            <h2>لطفا ثابت کنید که ربات نیستید</h2>
-            <div class="captcha-challenge">
-                <p>عدد زیر را در کادر وارد کنید:</p>
-                <div class="captcha-code" id="captchaCode"></div>
-                <input type="text" id="captchaInput" placeholder="عدد بالا را وارد کنید" autocomplete="off">
-                <button id="captchaSubmit">تایید</button>
-                <div id="captchaMessage" class="message"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- منوی همبرگر سمت چپ -->
-    <div class="hamburger-menu-left">
-        <div class="hamburger-btn" id="leftHamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="side-menu" id="sideMenu">
-            <div class="side-menu-header">
-                <h3>منوی مدیریت</h3>
-                <button class="close-menu" id="closeMenu">&times;</button>
-            </div>
-            <div class="side-menu-content">
-                <a href="#home" class="side-menu-item">
-                    <i class="fas fa-home"></i>
-                    <span>صفحه اصلی</span>
-                </a>
-                <a href="#news" class="side-menu-item">
-                    <i class="fas fa-newspaper"></i>
-                    <span>اخبار</span>
-                </a>
-                <a href="#shop" class="side-menu-item">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>فروشگاه</span>
-                </a>
-                <a href="#games" class="side-menu-item">
-                    <i class="fas fa-gamepad"></i>
-                    <span>بازی‌ها</span>
-                </a>
-                <a href="#stats" class="side-menu-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>آمار سایت</span>
-                </a>
-                <a href="#" class="side-menu-item" id="adminSideLink">
-                    <i class="fas fa-cog"></i>
-                    <span>پنل مدیریت</span>
-                </a>
-                <div class="side-menu-divider"></div>
-                <div class="quick-stats">
-                    <h4>آمار سریع</h4>
-                    <div class="quick-stat">
-                        <span>کاربران آنلاین:</span>
-                        <strong id="sideOnlineUsers">0</strong>
-                    </div>
-                    <div class="quick-stat">
-                        <span>بازدید امروز:</span>
-                        <strong id="sideTodayVisits">0</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- هدر سایت -->
     <header class="header">
         <nav class="navbar">
-            <div class="nav-container">
-                <a href="#home" class="logo">
+            <div class="container nav-container">
+                <div class="logo">
                     <i class="fas fa-gamepad"></i>
                     <span>BloodStrike Farsi</span>
-                </a>
-                <div class="datetime" id="datetime">
-                    <!-- ساعت و تاریخ اینجا نمایش داده می‌شود -->
                 </div>
                 <ul class="nav-menu">
                     <li><a href="#home">صفحه اصلی</a></li>
-                    <li><a href="#news">اخبار</a></li>
-                    <li><a href="#shop">فروشگاه</a></li>
                     <li><a href="#games">بازی‌ها</a></li>
                     <li><a href="#social">شبکه‌های اجتماعی</a></li>
                     <li><a href="#fun">آمار فان</a></li>
                     <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#register">ثبت نام</a></li>
-                    <li><a href="#suggestions">پیشنهادات</a></li>
-                    <li><a href="#donate">حمایت</a></li>
+                    <li><a href="#about">درباره ما</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -117,78 +879,13 @@
                 <p class="hero-description">مرجع تخصصی بازی BloodStrike و سایر بازی‌های محبوب</p>
                 <div class="hero-buttons">
                     <a href="#games" class="btn btn-primary">مشاهده بازی‌ها</a>
-                    <a href="#news" class="btn btn-secondary">آخرین اخبار</a>
+                    <a href="#social" class="btn btn-secondary">پیوستن به جامعه</a>
                 </div>
             </div>
             <div class="hero-background">
                 <div class="floating-element el1"></div>
                 <div class="floating-element el2"></div>
                 <div class="floating-element el3"></div>
-            </div>
-        </section>
-
-        <!-- بخش اخبار -->
-        <section id="news" class="news-section">
-            <div class="container">
-                <h2 class="section-title">آخرین اخبار</h2>
-                <div class="news-grid">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <div class="news-content">
-                            <h3>به زودی...</h3>
-                            <p>این بخش به زودی با آخرین اخبار و به‌روزرسانی‌ها پر خواهد شد.</p>
-                            <div class="news-date">
-                                <i class="far fa-calendar"></i>
-                                <span>به زودی</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-image">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div class="news-content">
-                            <h3>در حال توسعه</h3>
-                            <p>ما در حال آماده‌سازی محتوای جذاب برای این بخش هستیم.</p>
-                            <div class="news-date">
-                                <i class="far fa-calendar"></i>
-                                <span>به زودی</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-image">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <div class="news-content">
-                            <h3>بروزرسانی آینده</h3>
-                            <p>این بخش به زودی با مطالب تازه و جذاب به‌روز خواهد شد.</p>
-                            <div class="news-date">
-                                <i class="far fa-calendar"></i>
-                                <span>به زودی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش فروشگاه -->
-        <section id="shop" class="shop-section">
-            <div class="container">
-                <h2 class="section-title">فروشگاه</h2>
-                <div class="shop-content">
-                    <div class="shop-placeholder">
-                        <i class="fas fa-store"></i>
-                        <h3>فروشگاه به زودی راه‌اندازی می‌شود</h3>
-                        <p>ما در حال آماده‌سازی محصولات و خدمات ویژه برای شما هستیم</p>
-                        <div class="coming-soon">
-                            <span>به زودی</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -202,7 +899,7 @@
                             <i class="fas fa-crosshairs"></i>
                         </div>
                         <h3>BloodStrike</h3>
-                        <p>بازی اکشن و تیراندازی آنلاین با گرافیک فوق العاده</p>
+                        <p>بازی اکشن و تیراندازی آنلاین با گرافیک فوق العاده و گیم پلی جذاب</p>
                         <div class="game-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -215,8 +912,8 @@
                         <div class="game-icon">
                             <i class="fas fa-battle-net"></i>
                         </div>
-                        <h3>بازی ۲</h3>
-                        <p>توضیحات مختصری درباره بازی دوم</p>
+                        <h3>Call of Duty</h3>
+                        <p>بازی تیراندازی اول شخص با کمپین داستانی فوق العاده</p>
                         <div class="game-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -229,8 +926,8 @@
                         <div class="game-icon">
                             <i class="fas fa-ghost"></i>
                         </div>
-                        <h3>بازی ۳</h3>
-                        <p>توضیحات مختصری درباره بازی سوم</p>
+                        <h3>PUBG Mobile</h3>
+                        <p>بازی بتل رویال محبوب با گرافیک واقعی و گیم پلی سریع</p>
                         <div class="game-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -393,7 +1090,7 @@
                         </div>
                         <div class="stat-content">
                             <h3>بازدید کل</h3>
-                            <p id="totalVisits">0</p>
+                            <p id="totalVisits">۱۲,۸۵۰</p>
                             <span>تعداد کل بازدیدهای سایت</span>
                         </div>
                     </div>
@@ -402,9 +1099,9 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-content">
-                            <h3>کاربران آنلاین</h3>
-                            <p id="onlineUsers">0</p>
-                            <span>کاربران فعال در 15 دقیقه گذشته</span>
+                            <h3>کاربران فعال</h3>
+                            <p id="onlineUsers">۲۳۴</p>
+                            <span>کاربران فعال امروز</span>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -413,139 +1110,45 @@
                         </div>
                         <div class="stat-content">
                             <h3>بازدید امروز</h3>
-                            <p id="todayVisits">0</p>
+                            <p id="todayVisits">۸۵</p>
                             <span>بازدیدهای امروز</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- نمایش لیست کاربران آنلاین -->
-                <div class="online-users-section">
-                    <h3 class="subsection-title">کاربران آنلاین در حال حاضر</h3>
-                    <div class="online-users-list" id="onlineUsersList">
-                        <!-- لیست کاربران به صورت داینامیک پر می‌شود -->
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- بخش ثبت نام -->
-        <section id="register" class="register-section">
+        <!-- بخش درباره ما -->
+        <section id="about" class="about-section">
             <div class="container">
-                <h2 class="section-title">ساخت حساب کاربری</h2>
-                <div class="register-form">
-                    <div class="form-group">
-                        <label for="userEmail">ایمیل:</label>
-                        <input type="email" id="userEmail" placeholder="example@gmail.com" required>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">درباره ما</h2>
+                        <p>این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد. ما در اینجا بهترین و به‌روزترین اطلاعات درباره بازی BloodStrike و سایر بازی‌های محبوب را جمع‌آوری کرده‌ایم.</p>
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>آپدیت مداوم محتوا</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-users"></i>
+                                <span>جامعه فعال بازیکنان</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-headset"></i>
+                                <span>پشتیبانی آنلاین</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="userPassword">رمز عبور:</label>
-                        <input type="password" id="userPassword" placeholder="رمز عبور خود را وارد کنید" required>
-                    </div>
-                    <button id="registerBtn" class="btn btn-primary">ساخت حساب کاربری</button>
-                    <div id="registerMessage" class="message"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش پیشنهادات -->
-        <section id="suggestions" class="suggestions-section">
-            <div class="container">
-                <h2 class="section-title">پیشنهادات و انتقادات</h2>
-                <div class="suggestions-form">
-                    <div class="form-group">
-                        <label for="suggestionText">پیشنهاد شما:</label>
-                        <textarea id="suggestionText" placeholder="پیشنهادات و انتقادات خود را اینجا بنویسید..." rows="5"></textarea>
-                    </div>
-                    <button id="submitSuggestion" class="btn btn-primary">ارسال پیشنهاد</button>
-                    <div id="suggestionMessage" class="message"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش حمایت -->
-        <section id="donate" class="donate-section">
-            <div class="container">
-                <h2 class="section-title">حمایت از ما</h2>
-                <div class="donate-content">
-                    <p>این بخش به زودی فعال خواهد شد...</p>
-                    <div class="donate-placeholder">
-                        <i class="fas fa-heart"></i>
-                        <p>از حمایت شما سپاسگزاریم</p>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <!-- تبلیغات -->
-    <div id="advertisement" class="advertisement">
-        <div class="ad-content">
-            <span class="ad-close" id="adClose">&times;</span>
-            <h3>تبلیغات</h3>
-            <p>این یک تبلیغ نمونه است. برای بستن روی ضربدر کلیک کنید.</p>
-            <a href="#" class="btn btn-primary">مشاهده بیشتر</a>
-        </div>
-    </div>
-
-    <!-- پنل مدیریت -->
-    <div id="adminPanel" class="admin-panel">
-        <div class="admin-login">
-            <h2>ورود به پنل مدیریت</h2>
-            <div class="form-group">
-                <label for="adminEmail">ایمیل:</label>
-                <input type="email" id="adminEmail" placeholder="bloodstrikefarsi80@gmail.com">
-            </div>
-            <div class="form-group">
-                <label for="adminPassword">رمز عبور:</label>
-                <input type="password" id="adminPassword" placeholder="رمز عبور">
-            </div>
-            <button id="adminLoginBtn" class="btn btn-primary">ورود به پنل</button>
-            <button id="adminClose" class="btn btn-secondary">بستن</button>
-            <div id="adminMessage" class="message"></div>
-        </div>
-
-        <div id="adminContent" class="admin-content" style="display: none;">
-            <div class="admin-header">
-                <h2>پنل مدیریت</h2>
-                <button id="adminLogout" class="btn btn-secondary">خروج</button>
-            </div>
-            
-            <div class="admin-sections">
-                <div class="admin-section">
-                    <h3>مدیریت کاربران</h3>
-                    <div id="usersList" class="admin-list">
-                        <!-- لیست کاربران -->
-                    </div>
-                </div>
-                
-                <div class="admin-section">
-                    <h3>پیشنهادات کاربران</h3>
-                    <div id="suggestionsList" class="admin-list">
-                        <!-- لیست پیشنهادات -->
-                    </div>
-                </div>
-                
-                <div class="admin-section">
-                    <h3>آمار سایت</h3>
-                    <div class="admin-stats">
-                        <div class="admin-stat">
-                            <span>بازدید کل:</span>
-                            <strong id="adminTotalVisits">0</strong>
-                        </div>
-                        <div class="admin-stat">
-                            <span>بازدید امروز:</span>
-                            <strong id="adminTodayVisits">0</strong>
-                        </div>
-                        <div class="admin-stat">
-                            <span>کاربران ثبت‌نام شده:</span>
-                            <strong id="adminUserCount">0</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- فوتر -->
     <footer class="footer">
@@ -554,31 +1157,23 @@
                 <div class="footer-section">
                     <h3>BloodStrike Farsi</h3>
                     <p>مرجع تخصصی بازی‌های گیمینگ به زبان فارسی</p>
-                    <div class="footer-contact">
-                        <a href="mailto:bloodstrikefarsi80@gmail.com" class="contact-link">
-                            <i class="fas fa-envelope"></i>
-                            bloodstrikefarsi80@gmail.com
-                        </a>
-                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>لینک‌های سریع</h4>
                     <ul>
                         <li><a href="#home">صفحه اصلی</a></li>
-                        <li><a href="#news">اخبار</a></li>
-                        <li><a href="#shop">فروشگاه</a></li>
                         <li><a href="#games">بازی‌ها</a></li>
                         <li><a href="#social">شبکه‌های اجتماعی</a></li>
+                        <li><a href="#stats">آمار سایت</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>خدمات</h4>
-                    <ul>
-                        <li><a href="#register">ثبت نام</a></li>
-                        <li><a href="#suggestions">پیشنهادات</a></li>
-                        <li><a href="#donate">حمایت</a></li>
-                        <li><a href="#stats">آمار سایت</a></li>
-                    </ul>
+                    <h4>تماس با ما</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:bloodstrikefarsi80@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -587,7 +1182,80 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="advanced.js"></script>
+    <script>
+        // اسکریپت برای منوی هامبورگر و اسکرول نرم
+        document.addEventListener('DOMContentLoaded', function() {
+            // منوی هامبورگر
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // بستن منو هنگام کلیک روی لینک
+            document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }));
+            
+            // اسکرول نرم برای لینک‌ها
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // افکت اسکرول برای هدر
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(15, 15, 26, 0.95)';
+                    header.style.backdropFilter = 'blur(25px)';
+                } else {
+                    header.style.background = 'rgba(15, 15, 26, 0.8)';
+                    header.style.backdropFilter = 'blur(20px)';
+                }
+            });
+            
+            // انیمیشن برای عناصر هنگام اسکرول
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) translateZ(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // مشاهده عناصر برای انیمیشن
+            document.querySelectorAll('.game-card, .social-card, .fun-card, .stat-card, .about-text, .about-image').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px) translateZ(-20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
