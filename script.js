@@ -527,7 +527,7 @@ function initAdvertisementSystem() {
     }, 60000);
 }
 
-// سیستم پنل مدیریت
+// سیستم پنل مدیریت - با رفع مشکل ایمیل
 function initAdminPanel() {
     const adminLoginLink = document.getElementById('adminLoginLink');
     const adminPanel = document.getElementById('adminPanel');
@@ -545,6 +545,10 @@ function initAdminPanel() {
     adminLoginLink.addEventListener('click', function(e) {
         e.preventDefault();
         adminPanel.style.display = 'flex';
+        // پاک کردن فیلدها هنگام باز کردن پنل
+        if (adminEmail) adminEmail.value = '';
+        if (adminPassword) adminPassword.value = '';
+        if (adminMessage) adminMessage.textContent = '';
     });
     
     // بستن پنل مدیریت
@@ -557,7 +561,11 @@ function initAdminPanel() {
         const email = adminEmail.value.trim();
         const password = adminPassword.value.trim();
         
-        if (email === 'bloodstrikefarsi80@gmail.com' && password === 'SALAMISH85@') {
+        // ایمیل و رمز عبور صحیح
+        const correctEmail = 'bloodstrikefarsi80@gmail.com';
+        const correctPassword = 'SALAMISH85@';
+        
+        if (email === correctEmail && password === correctPassword) {
             // نمایش بخش مدیریت
             document.querySelector('.admin-login').style.display = 'none';
             adminContent.style.display = 'block';
@@ -574,9 +582,9 @@ function initAdminPanel() {
         adminContent.style.display = 'none';
         document.querySelector('.admin-login').style.display = 'block';
         adminPanel.style.display = 'none';
-        adminEmail.value = '';
-        adminPassword.value = '';
-        adminMessage.textContent = '';
+        if (adminEmail) adminEmail.value = '';
+        if (adminPassword) adminPassword.value = '';
+        if (adminMessage) adminMessage.textContent = '';
     });
 }
 
@@ -584,54 +592,62 @@ function initAdminPanel() {
 function loadAdminData() {
     // بارگذاری آمار
     const visitData = JSON.parse(localStorage.getItem('bloodstrike_visits') || '{}');
-    document.getElementById('adminTotalVisits').textContent = visitData.totalVisits || 0;
-    document.getElementById('adminTodayVisits').textContent = visitData.todayVisits || 0;
+    const adminTotalVisits = document.getElementById('adminTotalVisits');
+    const adminTodayVisits = document.getElementById('adminTodayVisits');
+    
+    if (adminTotalVisits) adminTotalVisits.textContent = visitData.totalVisits || 0;
+    if (adminTodayVisits) adminTodayVisits.textContent = visitData.todayVisits || 0;
     
     // بارگذاری کاربران
     const users = JSON.parse(localStorage.getItem('bloodstrike_users') || '[]');
-    document.getElementById('adminUserCount').textContent = users.length;
+    const adminUserCount = document.getElementById('adminUserCount');
+    if (adminUserCount) adminUserCount.textContent = users.length;
     
     const usersList = document.getElementById('usersList');
-    usersList.innerHTML = '';
-    
-    if (users.length === 0) {
-        usersList.innerHTML = '<p>هیچ کاربری ثبت‌نام نکرده است.</p>';
-    } else {
-        users.forEach(user => {
-            const userElement = document.createElement('div');
-            userElement.className = 'admin-list-item';
-            userElement.innerHTML = `
-                <div>
-                    <strong>${user.name}</strong>
-                    <br>
-                    <small>${user.email}</small>
-                </div>
-                <small>${new Date(user.createdAt).toLocaleDateString('fa-IR')}</small>
-            `;
-            usersList.appendChild(userElement);
-        });
+    if (usersList) {
+        usersList.innerHTML = '';
+        
+        if (users.length === 0) {
+            usersList.innerHTML = '<p>هیچ کاربری ثبت‌نام نکرده است.</p>';
+        } else {
+            users.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'admin-list-item';
+                userElement.innerHTML = `
+                    <div>
+                        <strong>${user.name}</strong>
+                        <br>
+                        <small>${user.email}</small>
+                    </div>
+                    <small>${new Date(user.createdAt).toLocaleDateString('fa-IR')}</small>
+                `;
+                usersList.appendChild(userElement);
+            });
+        }
     }
     
     // بارگذاری پیشنهادات
     const suggestions = JSON.parse(localStorage.getItem('bloodstrike_suggestions') || '[]');
     const suggestionsList = document.getElementById('suggestionsList');
-    suggestionsList.innerHTML = '';
-    
-    if (suggestions.length === 0) {
-        suggestionsList.innerHTML = '<p>هیچ پیشنهادی ثبت نشده است.</p>';
-    } else {
-        suggestions.forEach(suggestion => {
-            const suggestionElement = document.createElement('div');
-            suggestionElement.className = 'admin-list-item';
-            suggestionElement.innerHTML = `
-                <div>
-                    <strong>${suggestion.userName}</strong>
-                    <p>${suggestion.text}</p>
-                </div>
-                <small>${new Date(suggestion.createdAt).toLocaleDateString('fa-IR')}</small>
-            `;
-            suggestionsList.appendChild(suggestionElement);
-        });
+    if (suggestionsList) {
+        suggestionsList.innerHTML = '';
+        
+        if (suggestions.length === 0) {
+            suggestionsList.innerHTML = '<p>هیچ پیشنهادی ثبت نشده است.</p>';
+        } else {
+            suggestions.forEach(suggestion => {
+                const suggestionElement = document.createElement('div');
+                suggestionElement.className = 'admin-list-item';
+                suggestionElement.innerHTML = `
+                    <div>
+                        <strong>${suggestion.userName}</strong>
+                        <p>${suggestion.text}</p>
+                    </div>
+                    <small>${new Date(suggestion.createdAt).toLocaleDateString('fa-IR')}</small>
+                `;
+                suggestionsList.appendChild(suggestionElement);
+            });
+        }
     }
 }
 
