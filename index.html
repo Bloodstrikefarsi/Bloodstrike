@@ -1,35 +1,249 @@
-<section id="social" class="contact">
-  <div class="container">
-    <h2>شبکه‌های اجتماعی</h2>
-    <div class="social-row">
-      <div class="social-card">
-        <span>اینستاگرام 📸</span>
-        <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" target="_blank">مشاهده</a>
-      </div>
-      <div class="social-card">
-        <span>تلگرام کانال 📱</span>
-        <a href="https://t.me/BloodStrikeFarsi" target="_blank">مشاهده</a>
-      </div>
-      <div class="social-card">
-        <span>تلگرام گروه 👥</span>
-        <a href="https://t.me/BloodStrikeFarsy" target="_blank">مشاهده</a>
-      </div>
-      <div class="social-card">
-        <span>روبیکا کانال 📺</span>
-        <a href="https://rubika.ir/bloodstrikefarsi" target="_blank">مشاهده</a>
-      </div>
-      <div class="social-card">
-        <span>روبیکا گروه 👥</span>
-        <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" target="_blank">مشاهده</a>
-      </div>
-      <div class="social-card">
-        <span>پیام‌رسان بله 📩</span>
-        <a href="https://bale.ai/bloodstrikefarsi" target="_blank">مشاهده</a>
-      </div>
-      <div class="social-card">
-        <span>آپارات 🎥</span>
-        <a href="https://www.aparat.com/Bloodstrike" target="_blank">مشاهده</a>
-      </div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبکه‌های اجتماعی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .games-list {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .games-list h2 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .games-list ul {
+            list-style-type: none;
+            padding-right: 20px;
+        }
+        
+        .games-list li {
+            padding: 10px 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .games-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .divider {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 40px 0;
+            border-radius: 10px;
+        }
+        
+        .social-section {
+            margin-bottom: 40px;
+        }
+        
+        .social-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .social-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .social-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .social-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .social-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .about-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .about-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .about-section p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .social-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .games-list, .about-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>محبوب ترین بازی‌ها</h1>
+        </header>
+        
+        <section class="games-list">
+            <h2>لیست بازی‌ها</h2>
+            <ul>
+                <li>بازی ۱</li>
+                <li>بازی ۲</li>
+                <li>بازی ۳</li>
+            </ul>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <section class="social-section">
+            <h2>شبکه‌های اجتماعی</h2>
+            <div class="social-grid">
+                <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card" target="_blank">
+                    <i class="fab fa-instagram social-icon"></i>
+                    <div class="social-name">پیج اینستاگرام</div>
+                    <div class="social-desc">مطالب و ویدیوهای جذاب</div>
+                </a>
+                
+                <a href="https://t.me/BloodStrikeFarsi" class="social-card" target="_blank">
+                    <i class="fab fa-telegram social-icon"></i>
+                    <div class="social-name">کانال تلگرام</div>
+                    <div class="social-desc">آخرین اخبار و به‌روزرسانی‌ها</div>
+                </a>
+                
+                <a href="https://t.me/BloodStrikeFarsy" class="social-card" target="_blank">
+                    <i class="fab fa-telegram social-icon"></i>
+                    <div class="social-name">گروه تلگرام</div>
+                    <div class="social-desc">بحث و تبادل نظر با سایر بازیکنان</div>
+                </a>
+                
+                <a href="https://rubika.ir/bloodstrikefarsi" class="social-card" target="_blank">
+                    <i class="fas fa-comment social-icon"></i>
+                    <div class="social-name">کانال روبیکا</div>
+                    <div class="social-desc">محتواهای اختصاصی در روبیکا</div>
+                </a>
+                
+                <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card" target="_blank">
+                    <i class="fas fa-users social-icon"></i>
+                    <div class="social-name">گروه روبیکا</div>
+                    <div class="social-desc">جامعه فعال بازیکنان</div>
+                </a>
+                
+                <a href="https://ble.ir/bloodstrikefarsi" class="social-card" target="_blank">
+                    <i class="fas fa-comment-dots social-icon"></i>
+                    <div class="social-name">کانال بله</div>
+                    <div class="social-desc">پیام‌رسان داخلی بله</div>
+                </a>
+                
+                <a href="https://www.aparat.com/Bloodstrike" class="social-card" target="_blank">
+                    <i class="fas fa-play-circle social-icon"></i>
+                    <div class="social-name">پیج آپارات</div>
+                    <div class="social-desc">ویدیوهای آموزشی و گیم پلی</div>
+                </a>
+            </div>
+        </section>
+        
+        <section class="about-section">
+            <h2>درباره ما</h2>
+            <p>این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد.</p>
+        </section>
     </div>
-  </div>
-</section>
+</body>
+</html>
