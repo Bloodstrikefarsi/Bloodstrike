@@ -17,7 +17,7 @@
                 <p>عدد زیر را در کادر وارد کنید:</p>
                 <div class="captcha-code" id="captchaCode"></div>
                 <input type="text" id="captchaInput" placeholder="عدد بالا را وارد کنید" autocomplete="off">
-                <button id="captchaSubmit">تایید</button>
+                <button id="captchaSubmit" class="btn btn-primary">تایید</button>
                 <div id="captchaMessage" class="message"></div>
             </div>
         </div>
@@ -35,15 +35,13 @@
                     <!-- ساعت و تاریخ اینجا نمایش داده می‌شود -->
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="index.html">صفحه اصلی</a></li>
-                    <li><a href="register.html">ثبت نام</a></li>
-                    <li><a href="suggestions.html">پیشنهادات</a></li>
+                    <li><a href="#home">صفحه اصلی</a></li>
                     <li><a href="#games">بازی‌ها</a></li>
                     <li><a href="#social">شبکه‌های اجتماعی</a></li>
                     <li><a href="#fun">آمار فان</a></li>
                     <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#news">اخبار</a></li>
-                    <li><a href="#about">معرفی</a></li>
+                    <li><a href="#register">ثبت نام</a></li>
+                    <li><a href="#suggestions">پیشنهادات</a></li>
                     <li><a href="#donate">حمایت</a></li>
                     <li><a href="#contact">تماس با ما</a></li>
                     <li><a href="#" id="adminLoginLink">پنل مدیریت</a></li>
@@ -73,16 +71,6 @@
                 <div class="floating-element el1"></div>
                 <div class="floating-element el2"></div>
                 <div class="floating-element el3"></div>
-            </div>
-        </section>
-
-        <!-- بخش اخبار -->
-        <section id="news" class="news-section">
-            <div class="container">
-                <h2 class="section-title">اخبار روز</h2>
-                <div class="news-container" id="newsContainer">
-                    <!-- اخبار از طریق پنل مدیریت اضافه می‌شوند -->
-                </div>
             </div>
         </section>
 
@@ -323,12 +311,36 @@
             </div>
         </section>
 
-        <!-- بخش معرفی -->
-        <section id="about" class="about-section">
+        <!-- بخش ثبت نام -->
+        <section id="register" class="register-section">
             <div class="container">
-                <h2 class="section-title">معرفی</h2>
-                <div class="about-content" id="aboutContent">
-                    <!-- محتوای معرفی از طریق پنل مدیریت اضافه می‌شود -->
+                <h2 class="section-title">ساخت حساب کاربری</h2>
+                <div class="register-form">
+                    <div class="form-group">
+                        <label for="userEmail">ایمیل:</label>
+                        <input type="email" id="userEmail" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">رمز عبور:</label>
+                        <input type="password" id="userPassword" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                    <button id="registerBtn" class="btn btn-primary">ساخت حساب کاربری</button>
+                    <div id="registerMessage" class="message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش پیشنهادات -->
+        <section id="suggestions" class="suggestions-section">
+            <div class="container">
+                <h2 class="section-title">پیشنهادات و انتقادات</h2>
+                <div class="suggestions-form">
+                    <div class="form-group">
+                        <label for="suggestionText">پیشنهاد شما:</label>
+                        <textarea id="suggestionText" placeholder="پیشنهادات و انتقادات خود را اینجا بنویسید..." rows="5"></textarea>
+                    </div>
+                    <button id="submitSuggestion" class="btn btn-primary">ارسال پیشنهاد</button>
+                    <div id="suggestionMessage" class="message"></div>
                 </div>
             </div>
         </section>
@@ -388,10 +400,6 @@
                 <label for="adminPassword">رمز عبور:</label>
                 <input type="password" id="adminPassword" placeholder="رمز عبور خود را وارد کنید" autocomplete="off">
             </div>
-            <div class="form-group">
-                <label for="adminPhone">شماره موبایل:</label>
-                <input type="text" id="adminPhone" placeholder="شماره موبایل خود را وارد کنید" autocomplete="off">
-            </div>
             <button id="adminLoginBtn" class="btn btn-primary">ورود به پنل</button>
             <button id="adminClose" class="btn btn-secondary">بستن</button>
             <div id="adminMessage" class="message"></div>
@@ -415,35 +423,6 @@
                     <h3>پیشنهادات کاربران</h3>
                     <div id="suggestionsList" class="admin-list">
                         <!-- لیست پیشنهادات -->
-                    </div>
-                </div>
-
-                <div class="admin-section">
-                    <h3>مدیریت اخبار</h3>
-                    <div class="admin-form">
-                        <div class="form-group">
-                            <label for="newsTitle">عنوان خبر:</label>
-                            <input type="text" id="newsTitle" placeholder="عنوان خبر">
-                        </div>
-                        <div class="form-group">
-                            <label for="newsContent">متن خبر:</label>
-                            <textarea id="newsContent" placeholder="متن خبر" rows="4"></textarea>
-                        </div>
-                        <button id="addNewsBtn" class="btn btn-primary">افزودن خبر</button>
-                    </div>
-                    <div id="newsList" class="admin-list">
-                        <!-- لیست اخبار -->
-                    </div>
-                </div>
-
-                <div class="admin-section">
-                    <h3>مدیریت بخش معرفی</h3>
-                    <div class="admin-form">
-                        <div class="form-group">
-                            <label for="aboutContent">متن معرفی:</label>
-                            <textarea id="aboutContentAdmin" placeholder="متن بخش معرفی" rows="6"></textarea>
-                        </div>
-                        <button id="saveAboutBtn" class="btn btn-primary">ذخیره معرفی</button>
                     </div>
                 </div>
                 
@@ -479,11 +458,11 @@
                 <div class="footer-section">
                     <h4>لینک‌های سریع</h4>
                     <ul>
-                        <li><a href="index.html">صفحه اصلی</a></li>
-                        <li><a href="register.html">ثبت نام</a></li>
-                        <li><a href="suggestions.html">پیشنهادات</a></li>
+                        <li><a href="#home">صفحه اصلی</a></li>
                         <li><a href="#games">بازی‌ها</a></li>
-                        <li><a href="#news">اخبار</a></li>
+                        <li><a href="#social">شبکه‌های اجتماعی</a></li>
+                        <li><a href="#stats">آمار سایت</a></li>
+                        <li><a href="#register">ثبت نام</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
