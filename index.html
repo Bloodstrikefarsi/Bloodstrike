@@ -9,6 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- تشخیص ربات -->
+    <div id="botDetection" class="bot-detection">
+        <div class="captcha-container">
+            <h2>لطفا ثابت کنید که ربات نیستید</h2>
+            <div class="captcha-challenge">
+                <p>عدد زیر را در کادر وارد کنید:</p>
+                <div class="captcha-code" id="captchaCode">1234</div>
+                <input type="text" id="captchaInput" placeholder="عدد بالا را وارد کنید">
+                <button id="captchaSubmit">تایید</button>
+            </div>
+        </div>
+    </div>
+
     <!-- هدر سایت -->
     <header class="header">
         <nav class="navbar">
@@ -17,12 +30,20 @@
                     <i class="fas fa-gamepad"></i>
                     <span>BloodStrike Farsi</span>
                 </div>
+                <div class="datetime" id="datetime">
+                    <!-- ساعت و تاریخ اینجا نمایش داده می‌شود -->
+                </div>
                 <ul class="nav-menu">
                     <li><a href="#home">صفحه اصلی</a></li>
                     <li><a href="#games">بازی‌ها</a></li>
                     <li><a href="#social">شبکه‌های اجتماعی</a></li>
+                    <li><a href="#fun">آمار فان</a></li>
                     <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#about">درباره ما</a></li>
+                    <li><a href="#register">ثبت نام</a></li>
+                    <li><a href="#suggestions">پیشنهادات</a></li>
+                    <li><a href="#donate">حمایت</a></li>
+                    <li><a href="#contact">تماس با ما</a></li>
+                    <li><a href="#" id="adminLoginLink">پنل مدیریت</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -98,6 +119,39 @@
                             <i class="fas fa-star-half-alt"></i>
                             <i class="far fa-star"></i>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش فان -->
+        <section id="fun" class="fun-section">
+            <div class="container">
+                <h2 class="section-title">آمار فان و طنز! 😄</h2>
+                <div class="fun-grid">
+                    <div class="fun-card">
+                        <div class="fun-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>سابقه فعالیت</h3>
+                        <p class="fun-number">۸۵ سال</p>
+                        <p class="fun-description">با وجود اینکه بازی فقط ۳ ساله منتشر شده!</p>
+                    </div>
+                    <div class="fun-card">
+                        <div class="fun-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>معاملات موفق</h3>
+                        <p class="fun-number">بیش از ۸۵ میلیون</p>
+                        <p class="fun-description">معامله در سراسر جهان!</p>
+                    </div>
+                    <div class="fun-card">
+                        <div class="fun-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>بازی تحت پوشش</h3>
+                        <p class="fun-number">۸۵ عدد</p>
+                        <p class="fun-description">بازی مختلف فقط توسط ما!</p>
                     </div>
                 </div>
             </div>
@@ -256,37 +310,141 @@
             </div>
         </section>
 
-        <!-- بخش درباره ما -->
-        <section id="about" class="about-section">
+        <!-- بخش ثبت نام -->
+        <section id="register" class="register-section">
             <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2 class="section-title">درباره ما</h2>
-                        <p>این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد. ما در اینجا بهترین و به‌روزترین اطلاعات درباره بازی BloodStrike و سایر بازی‌های محبوب را جمع‌آوری کرده‌ایم.</p>
-                        <div class="about-features">
-                            <div class="feature">
-                                <i class="fas fa-sync-alt"></i>
-                                <span>آپدیت مداوم محتوا</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-users"></i>
-                                <span>جامعه فعال بازیکنان</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-headset"></i>
-                                <span>پشتیبانی آنلاین</span>
-                            </div>
-                        </div>
+                <h2 class="section-title">ساخت حساب کاربری</h2>
+                <div class="register-form">
+                    <div class="form-group">
+                        <label for="userEmail">ایمیل:</label>
+                        <input type="email" id="userEmail" placeholder="example@gmail.com" required>
                     </div>
-                    <div class="about-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-gamepad"></i>
+                    <div class="form-group">
+                        <label for="userPassword">رمز عبور:</label>
+                        <input type="password" id="userPassword" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                    <button id="registerBtn" class="btn btn-primary">ساخت حساب کاربری</button>
+                    <div id="registerMessage" class="message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش پیشنهادات -->
+        <section id="suggestions" class="suggestions-section">
+            <div class="container">
+                <h2 class="section-title">پیشنهادات و انتقادات</h2>
+                <div class="suggestions-form">
+                    <div class="form-group">
+                        <label for="suggestionText">پیشنهاد شما:</label>
+                        <textarea id="suggestionText" placeholder="پیشنهادات و انتقادات خود را اینجا بنویسید..." rows="5"></textarea>
+                    </div>
+                    <button id="submitSuggestion" class="btn btn-primary">ارسال پیشنهاد</button>
+                    <div id="suggestionMessage" class="message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش حمایت -->
+        <section id="donate" class="donate-section">
+            <div class="container">
+                <h2 class="section-title">حمایت از ما</h2>
+                <div class="donate-content">
+                    <p>این بخش به زودی فعال خواهد شد...</p>
+                    <div class="donate-placeholder">
+                        <i class="fas fa-heart"></i>
+                        <p>از حمایت شما سپاسگزاریم</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تماس با ما -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">تماس با ما</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>ایمیل</h3>
+                                <p>bloodstrikefarsi80@gmail.com</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- تبلیغات -->
+    <div id="advertisement" class="advertisement">
+        <div class="ad-content">
+            <span class="ad-close" id="adClose">&times;</span>
+            <h3>تبلیغات</h3>
+            <p>این یک تبلیغ نمونه است. برای بستن روی ضربدر کلیک کنید.</p>
+            <a href="#" class="btn btn-primary">مشاهده بیشتر</a>
+        </div>
+    </div>
+
+    <!-- پنل مدیریت -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-login">
+            <h2>ورود به پنل مدیریت</h2>
+            <div class="form-group">
+                <label for="adminEmail">ایمیل:</label>
+                <input type="email" id="adminEmail" placeholder="bloodstrikefarsi80@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">رمز عبور:</label>
+                <input type="password" id="adminPassword" placeholder="رمز عبور">
+            </div>
+            <button id="adminLoginBtn" class="btn btn-primary">ورود به پنل</button>
+            <button id="adminClose" class="btn btn-secondary">بستن</button>
+            <div id="adminMessage" class="message"></div>
+        </div>
+
+        <div id="adminContent" class="admin-content" style="display: none;">
+            <div class="admin-header">
+                <h2>پنل مدیریت</h2>
+                <button id="adminLogout" class="btn btn-secondary">خروج</button>
+            </div>
+            
+            <div class="admin-sections">
+                <div class="admin-section">
+                    <h3>مدیریت کاربران</h3>
+                    <div id="usersList" class="admin-list">
+                        <!-- لیست کاربران -->
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>پیشنهادات کاربران</h3>
+                    <div id="suggestionsList" class="admin-list">
+                        <!-- لیست پیشنهادات -->
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>آمار سایت</h3>
+                    <div class="admin-stats">
+                        <div class="admin-stat">
+                            <span>بازدید کل:</span>
+                            <strong id="adminTotalVisits">0</strong>
+                        </div>
+                        <div class="admin-stat">
+                            <span>بازدید امروز:</span>
+                            <strong id="adminTodayVisits">0</strong>
+                        </div>
+                        <div class="admin-stat">
+                            <span>کاربران ثبت‌نام شده:</span>
+                            <strong id="adminUserCount">0</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- فوتر -->
     <footer class="footer">
@@ -303,6 +461,7 @@
                         <li><a href="#games">بازی‌ها</a></li>
                         <li><a href="#social">شبکه‌های اجتماعی</a></li>
                         <li><a href="#stats">آمار سایت</a></li>
+                        <li><a href="#register">ثبت نام</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -310,7 +469,7 @@
                     <div class="social-links">
                         <a href="#"><i class="fab fa-telegram"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="mailto:bloodstrikefarsi80@gmail.com"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
