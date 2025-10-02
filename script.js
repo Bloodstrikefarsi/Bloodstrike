@@ -1,21 +1,46 @@
-// اسکریپت برای تعاملی کردن سایت
+// اسکریپت برای منوی هامبورگر و اسکرول نرم
 document.addEventListener('DOMContentLoaded', function() {
-    // منوی هامبورگر
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
+    // سیستم تشخیص ربات - باید اول اجرا شود
+    initBotDetection();
     
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-        
-        // بستن منو هنگام کلیک روی لینک
-        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }));
+    // بقیه کدها فقط اگر کپچا حل شده باشد اجرا شوند
+    if (localStorage.getItem('captchaSolved') === 'true') {
+        initializeSite();
     }
+});
+
+// تابع اصلی برای راه‌اندازی سایت
+function initializeSite() {
+    // سیستم ساعت و تاریخ
+    initDateTimeSystem();
+    
+    // سیستم ذرات متحرک
+    initParticles();
+    
+    // سیستم آمار بازدید و کاربران آنلاین
+    const visitTracker = new VisitTracker();
+    
+    // به‌روزرسانی اولیه نمایش
+    const visitData = visitTracker.getVisitData();
+    visitTracker.updateDisplay(visitData);
+    
+    const onlineUsers = visitTracker.getOnlineUsers();
+    visitTracker.updateOnlineUsersDisplay(onlineUsers);
+    
+    // سیستم ثبت نام
+    initRegistrationSystem();
+    
+    // سیستم پیشنهادات
+    initSuggestionsSystem();
+    
+    // سیستم تبلیغات
+    initAdvertisementSystem();
+    
+    // سیستم پنل مدیریت
+    initAdminPanel();
+    
+    // سال جاری در فوتر
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
     
     // اسکرول نرم برای لینک‌ها
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -38,26 +63,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // افکت پارالاکس برای پس‌زمینه
+    // افکت اسکرول برای هدر
     window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.particle');
-        
-        parallaxElements.forEach((element, index) => {
-            const speed = 0.5 + (index * 0.1);
-            const yPos = -(scrolled * speed);
-            element.style.transform = `translateY(${yPos}px) translateZ(0)`;
-        });
-        
-        // افکت شیشه‌ای برای هدر
         const header = document.querySelector('.header');
         if (header) {
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(15, 15, 26, 0.95)';
-                header.style.backdropFilter = 'blur(30px)';
-            } else {
-                header.style.background = 'rgba(15, 15, 26, 0.8)';
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
                 header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.8)';
+                header.style.backdropFilter = 'blur(10px)';
             }
         }
     });
@@ -72,47 +87,225 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0) translateZ(0)';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
     }, observerOptions);
     
     // مشاهده عناصر برای انیمیشن
-    document.querySelectorAll('.game-card, .fun-card, .social-card, .feature, .contact-card').forEach(el => {
+    document.querySelectorAll('.game-card, .social-card, .fun-card, .stat-card, .register-form, .suggestions-form').forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px) translateZ(0)';
+        el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+}
+
+// سیستم تشخیص ربات
+function initBotDetection() {
+    const botDetection = document.getElementById('botDetection');
+    const captchaCode = document.getElementById('captchaCode');
+    const captchaInput = document.getElementById('captchaInput');
+    const captchaSubmit = document.getElementById('captchaSubmit');
+    const captchaMessage = document.getElementById('captchaMessage');
     
-    // افکت hover سه بعدی برای کارت‌ها
-    document.querySelectorAll('.game-card, .fun-card, .social-card').forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateY = (x - centerX) / 25;
-            const rotateX = (centerY - y) / 25;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
-        });
+    // بررسی اگر کپچا قبلاً حل شده باشد
+    if (localStorage.getItem('captchaSolved') === 'true') {
+        if (botDetection) botDetection.style.display = 'none';
+        initializeSite();
+        return;
+    }
+    
+    // اگر عناصر کپچا وجود ندارند، سایت را مستقیماً راه‌اندازی کن
+    if (!botDetection || !captchaCode || !captchaInput || !captchaSubmit) {
+        console.error('عناصر کپچا پیدا نشدند');
+        initializeSite();
+        return;
+    }
+    
+    // تولید کد تصادفی برای کپچا
+    function generateCaptcha() {
+        const chars = '0123456789';
+        let result = '';
+        for (let i = 0; i < 4; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+    
+    let currentCaptcha = generateCaptcha();
+    
+    // نمایش کپچا
+    captchaCode.textContent = currentCaptcha;
+    botDetection.style.display = 'flex';
+    captchaMessage.style.display = 'none';
+    
+    // تابع برای بررسی کپچا
+    function checkCaptcha() {
+        const userInput = captchaInput.value.trim();
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-        });
+        if (userInput === '') {
+            showCaptchaMessage('لطفا کد را وارد کنید', 'error');
+            return false;
+        }
+        
+        if (userInput === currentCaptcha) {
+            // کپچا صحیح است
+            localStorage.setItem('captchaSolved', 'true');
+            botDetection.style.display = 'none';
+            showCaptchaMessage('', 'success');
+            initializeSite();
+            return true;
+        } else {
+            // کپچا نادرست است
+            showCaptchaMessage('کد وارد شده صحیح نیست. لطفا دوباره تلاش کنید.', 'error');
+            currentCaptcha = generateCaptcha();
+            captchaCode.textContent = currentCaptcha;
+            captchaInput.value = '';
+            captchaInput.focus();
+            return false;
+        }
+    }
+    
+    // رویداد کلیک روی دکمه تایید
+    captchaSubmit.addEventListener('click', function(e) {
+        e.preventDefault();
+        checkCaptcha();
     });
     
-    // سیستم ساده آمار بازدید
-    function trackVisit() {
-        let visitData = JSON.parse(localStorage.getItem('site_visits') || '{}');
-        const today = new Date().toDateString();
+    // امکان Enter برای تایید
+    captchaInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkCaptcha();
+        }
+    });
+    
+    // تابع نمایش پیام کپچا
+    function showCaptchaMessage(message, type) {
+        if (message) {
+            captchaMessage.textContent = message;
+            captchaMessage.className = `message ${type}`;
+            captchaMessage.style.display = 'block';
+        } else {
+            captchaMessage.style.display = 'none';
+        }
+    }
+    
+    // فوکوس روی فیلد ورودی
+    captchaInput.focus();
+}
+
+// سیستم ذرات متحرک
+function initParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+    
+    // تعداد ذرات
+    const particleCount = 50;
+    
+    // ایجاد ذرات
+    for (let i = 0; i < particleCount; i++) {
+        createParticle(particlesContainer);
+    }
+    
+    function createParticle(container) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
         
+        // موقعیت تصادفی
+        const left = Math.random() * 100;
+        const delay = Math.random() * 8;
+        
+        // تنظیمات ذره
+        particle.style.left = `${left}%`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        // اندازه و شفافیت تصادفی
+        const size = Math.random() * 3 + 2;
+        const opacity = Math.random() * 0.5 + 0.3;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.opacity = opacity;
+        
+        // رنگ تصادفی
+        const colors = ['#ff2d55', '#5856d6', '#007aff', '#34c759', '#ffcc00'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.background = color;
+        
+        container.appendChild(particle);
+        
+        // پس از اتمام انیمیشن، ذره را حذف و جدید ایجاد کن
+        setTimeout(() => {
+            particle.remove();
+            createParticle(container);
+        }, 8000 + delay * 1000);
+    }
+}
+
+// سیستم ساعت و تاریخ دقیق
+function initDateTimeSystem() {
+    function updateDateTime() {
+        const now = new Date();
+        
+        // تنظیمات تاریخ فارسی
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        
+        const persianDate = now.toLocaleDateString('fa-IR', options);
+        const datetimeElement = document.getElementById('datetime');
+        if (datetimeElement) {
+            datetimeElement.textContent = persianDate;
+        }
+    }
+    
+    // به‌روزرسانی هر ثانیه
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+}
+
+// سیستم آمار بازدید و کاربران آنلاین
+class VisitTracker {
+    constructor() {
+        this.storageKey = 'bloodstrike_visits';
+        this.onlineUsersKey = 'bloodstrike_online_users';
+        this.usersKey = 'bloodstrike_users';
+        this.currentSessionId = this.generateSessionId();
+        this.init();
+    }
+
+    // تولید شناسه منحصر به فرد برای هر session
+    generateSessionId() {
+        return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+    }
+
+    // مقداردهی اولیه
+    init() {
+        this.trackVisit();
+        this.updateOnlineUsers();
+        this.setupPeriodicUpdates();
+    }
+
+    // ردیابی بازدید
+    trackVisit() {
+        const now = new Date();
+        const today = now.toDateString();
+        
+        // دریافت داده‌های موجود
+        let visitData = this.getVisitData();
+        
+        // افزایش بازدید کل
         visitData.totalVisits = (visitData.totalVisits || 0) + 1;
         
+        // افزایش بازدید امروز
         if (visitData.lastVisitDate !== today) {
             visitData.todayVisits = 1;
             visitData.lastVisitDate = today;
@@ -120,54 +313,416 @@ document.addEventListener('DOMContentLoaded', function() {
             visitData.todayVisits = (visitData.todayVisits || 0) + 1;
         }
         
-        localStorage.setItem('site_visits', JSON.stringify(visitData));
+        // ذخیره داده‌ها
+        this.saveVisitData(visitData);
+        
+        // نمایش در صفحه
+        this.updateDisplay(visitData);
     }
-    
-    trackVisit();
-    
-    // افکت تایپ برای عنوان هیرو
-    function initTypeEffect() {
-        const titleWords = document.querySelectorAll('.title-word');
-        titleWords.forEach((word, index) => {
-            word.style.animationDelay = `${index * 0.2}s`;
+
+    // دریافت داده‌های بازدید
+    getVisitData() {
+        const data = localStorage.getItem(this.storageKey);
+        return data ? JSON.parse(data) : {};
+    }
+
+    // ذخیره داده‌های بازدید
+    saveVisitData(data) {
+        localStorage.setItem(this.storageKey, JSON.stringify(data));
+    }
+
+    // به‌روزرسانی کاربران آنلاین
+    updateOnlineUsers() {
+        const now = Date.now();
+        const fifteenMinutes = 15 * 60 * 1000; // 15 دقیقه
+        
+        // دریافت لیست کاربران آنلاین
+        let onlineUsers = this.getOnlineUsers();
+        
+        // دریافت کاربران ثبت‌نام شده
+        const registeredUsers = JSON.parse(localStorage.getItem(this.usersKey) || '[]');
+        const currentUser = registeredUsers[registeredUsers.length - 1]; // آخرین کاربر ثبت‌نام شده
+        
+        // افزودن یا به‌روزرسانی کاربر فعلی
+        onlineUsers[this.currentSessionId] = {
+            id: this.currentSessionId,
+            lastActive: now,
+            name: currentUser ? currentUser.name : this.generateRandomName(),
+            avatar: this.generateRandomAvatar(),
+            isRegistered: !!currentUser
+        };
+        
+        // حذف کاربران غیرفعال (بیش از 15 دقیقه)
+        Object.keys(onlineUsers).forEach(sessionId => {
+            if (now - onlineUsers[sessionId].lastActive > fifteenMinutes) {
+                delete onlineUsers[sessionId];
+            }
         });
+        
+        // ذخیره لیست به‌روزرسانی شده
+        this.saveOnlineUsers(onlineUsers);
+        
+        // نمایش در صفحه
+        this.updateOnlineUsersDisplay(onlineUsers);
     }
-    
-    initTypeEffect();
-    
-    // مدیریت رسپانسیو
-    function handleResize() {
-        if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+
+    // دریافت لیست کاربران آنلاین
+    getOnlineUsers() {
+        const data = localStorage.getItem(this.onlineUsersKey);
+        return data ? JSON.parse(data) : {};
+    }
+
+    // ذخیره لیست کاربران آنلاین
+    saveOnlineUsers(users) {
+        localStorage.setItem(this.onlineUsersKey, JSON.stringify(users));
+    }
+
+    // تولید نام تصادفی برای کاربر
+    generateRandomName() {
+        const names = ['بازیکن ۱', 'بازیکن ۲', 'بازیکن ۳', 'بازیکن ۴', 'بازیکن ۵', 
+                      'GamerPro', 'NightHunter', 'ShadowWolf', 'DragonSlayer', 'Phoenix'];
+        return names[Math.floor(Math.random() * names.length)];
+    }
+
+    // تولید آواتار تصادفی
+    generateRandomAvatar() {
+        const avatars = ['fas fa-user', 'fas fa-user-ninja', 'fas fa-user-astronaut', 
+                        'fas fa-robot', 'fas fa-gamepad', 'fas fa-mask'];
+        return avatars[Math.floor(Math.random() * avatars.length)];
+    }
+
+    // به‌روزرسانی نمایش آمار
+    updateDisplay(data) {
+        const totalVisitsElement = document.getElementById('totalVisits');
+        const todayVisitsElement = document.getElementById('todayVisits');
+        
+        if (totalVisitsElement) {
+            totalVisitsElement.textContent = this.formatNumber(data.totalVisits || 0);
+        }
+        
+        if (todayVisitsElement) {
+            todayVisitsElement.textContent = this.formatNumber(data.todayVisits || 0);
         }
     }
-    
-    window.addEventListener('resize', handleResize);
-    
-    // پیش‌بارگذاری تصاویر و فونت‌ها
-    window.addEventListener('load', function() {
-        document.body.classList.add('loaded');
-    });
-});
 
-// افکت‌های پیشرفته سه بعدی
-function initAdvanced3DEffects() {
-    // افکت مousse move برای کل صفحه
-    document.addEventListener('mousemove', function(e) {
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
+    // به‌روزرسانی نمایش کاربران آنلاین
+    updateOnlineUsersDisplay(users) {
+        const onlineUsersElement = document.getElementById('onlineUsers');
+        const onlineUsersListElement = document.getElementById('onlineUsersList');
         
-        const particles = document.querySelectorAll('.particle');
-        particles.forEach((particle, index) => {
-            const depth = (index + 1) * 20;
-            const moveX = (mouseX - 0.5) * depth;
-            const moveY = (mouseY - 0.5) * depth;
+        // به‌روزرسانی تعداد کاربران آنلاین
+        if (onlineUsersElement) {
+            onlineUsersElement.textContent = Object.keys(users).length;
+        }
+        
+        // به‌روزرسانی لیست کاربران
+        if (onlineUsersListElement) {
+            const userList = Object.values(users);
             
-            particle.style.transform = `translate(${moveX}px, ${moveY}px) translateZ(0)`;
+            if (userList.length === 0) {
+                onlineUsersListElement.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <p>هیچ کاربر آنلاینی وجود ندارد</p>
+                    </div>
+                `;
+            } else {
+                onlineUsersListElement.innerHTML = userList.map(user => `
+                    <div class="user-card">
+                        <div class="user-avatar">
+                            <i class="${user.avatar}"></i>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">${user.name}</div>
+                            <div class="user-status">
+                                <div class="status-indicator"></div>
+                                <span>${user.isRegistered ? 'ثبت‌نام شده' : 'مهمان'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+    }
+
+    // فرمت اعداد (جداسازی هزارگان)
+    formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // تنظیم به‌روزرسانی دوره‌ای
+    setupPeriodicUpdates() {
+        // به‌روزرسانی هر 30 ثانیه
+        setInterval(() => {
+            this.updateOnlineUsers();
+        }, 30000);
+        
+        // به‌روزرسانی فعالیت کاربر هنگام اسکرول یا کلیک
+        ['click', 'scroll', 'keypress'].forEach(event => {
+            document.addEventListener(event, () => {
+                this.updateOnlineUsers();
+            }, { passive: true });
         });
+    }
+}
+
+// سیستم ثبت نام
+function initRegistrationSystem() {
+    const registerBtn = document.getElementById('registerBtn');
+    const userEmail = document.getElementById('userEmail');
+    const userPassword = document.getElementById('userPassword');
+    const registerMessage = document.getElementById('registerMessage');
+    
+    if (!registerBtn || !userEmail || !userPassword) return;
+    
+    registerBtn.addEventListener('click', function() {
+        const email = userEmail.value.trim();
+        const password = userPassword.value.trim();
+        
+        if (!email || !password) {
+            showMessage(registerMessage, 'لطفا تمام فیلدها را پر کنید.', 'error');
+            return;
+        }
+        
+        if (!isValidEmail(email)) {
+            showMessage(registerMessage, 'لطفا یک ایمیل معتبر وارد کنید.', 'error');
+            return;
+        }
+        
+        // بررسی وجود ایمیل در سیستم
+        const users = JSON.parse(localStorage.getItem('bloodstrike_users') || '[]');
+        const existingUser = users.find(user => user.email === email);
+        
+        if (existingUser) {
+            showMessage(registerMessage, 'این ایمیل قبلا ثبت شده است.', 'error');
+            return;
+        }
+        
+        // تولید نام تصادفی
+        const randomName = generateRandomName();
+        
+        // ایجاد کاربر جدید
+        const newUser = {
+            id: 'user_' + Date.now(),
+            name: randomName,
+            email: email,
+            password: password, // در محیط واقعی باید هش شود
+            createdAt: new Date().toISOString()
+        };
+        
+        // ذخیره کاربر
+        users.push(newUser);
+        localStorage.setItem('bloodstrike_users', JSON.stringify(users));
+        
+        // نمایش پیام موفقیت
+        showMessage(registerMessage, `حساب کاربری با موفقیت ایجاد شد! نام کاربری شما: ${randomName}`, 'success');
+        
+        // پاک کردن فرم
+        userEmail.value = '';
+        userPassword.value = '';
+        
+        // به‌روزرسانی لیست کاربران آنلاین
+        const visitTracker = new VisitTracker();
+        visitTracker.updateOnlineUsers();
     });
 }
 
-// راه‌اندازی افکت‌های پیشرفته پس از بارگذاری
-window.addEventListener('load', initAdvanced3DEffects);
+// سیستم پیشنهادات
+function initSuggestionsSystem() {
+    const submitSuggestion = document.getElementById('submitSuggestion');
+    const suggestionText = document.getElementById('suggestionText');
+    const suggestionMessage = document.getElementById('suggestionMessage');
+    
+    if (!submitSuggestion || !suggestionText) return;
+    
+    submitSuggestion.addEventListener('click', function() {
+        const text = suggestionText.value.trim();
+        
+        if (!text) {
+            showMessage(suggestionMessage, 'لطفا پیشنهاد خود را وارد کنید.', 'error');
+            return;
+        }
+        
+        // دریافت کاربران برای شناسایی کاربر فعلی
+        const users = JSON.parse(localStorage.getItem('bloodstrike_users') || '[]');
+        const currentUser = users.length > 0 ? users[users.length - 1] : null;
+        
+        // ایجاد پیشنهاد جدید
+        const newSuggestion = {
+            id: 'suggestion_' + Date.now(),
+            userId: currentUser ? currentUser.id : 'guest',
+            userName: currentUser ? currentUser.name : 'کاربر مهمان',
+            text: text,
+            createdAt: new Date().toISOString()
+        };
+        
+        // ذخیره پیشنهاد
+        const suggestions = JSON.parse(localStorage.getItem('bloodstrike_suggestions') || '[]');
+        suggestions.push(newSuggestion);
+        localStorage.setItem('bloodstrike_suggestions', JSON.stringify(suggestions));
+        
+        // نمایش پیام موفقیت
+        showMessage(suggestionMessage, 'پیشنهاد شما با موفقیت ثبت شد. با تشکر!', 'success');
+        
+        // پاک کردن فرم
+        suggestionText.value = '';
+    });
+}
+
+// سیستم تبلیغات
+function initAdvertisementSystem() {
+    const advertisement = document.getElementById('advertisement');
+    const adClose = document.getElementById('adClose');
+    
+    if (!advertisement || !adClose) return;
+    
+    // نمایش تبلیغ پس از 30 ثانیه
+    setTimeout(() => {
+        advertisement.style.display = 'block';
+    }, 30000);
+    
+    // بستن تبلیغ
+    adClose.addEventListener('click', function() {
+        advertisement.style.display = 'none';
+    });
+    
+    // نمایش مجدد تبلیغ هر 1 دقیقه
+    setInterval(() => {
+        advertisement.style.display = 'block';
+    }, 60000);
+}
+
+// سیستم پنل مدیریت
+function initAdminPanel() {
+    const adminLoginLink = document.getElementById('adminLoginLink');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminClose = document.getElementById('adminClose');
+    const adminLogout = document.getElementById('adminLogout');
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPassword = document.getElementById('adminPassword');
+    const adminMessage = document.getElementById('adminMessage');
+    const adminContent = document.getElementById('adminContent');
+    
+    if (!adminLoginLink || !adminPanel) return;
+    
+    // باز کردن پنل مدیریت
+    adminLoginLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        adminPanel.style.display = 'flex';
+    });
+    
+    // بستن پنل مدیریت
+    adminClose.addEventListener('click', function() {
+        adminPanel.style.display = 'none';
+    });
+    
+    // ورود به پنل مدیریت
+    adminLoginBtn.addEventListener('click', function() {
+        const email = adminEmail.value.trim();
+        const password = adminPassword.value.trim();
+        
+        if (email === 'bloodstrikefarsi80@gmail.com' && password === 'SALAMISH85@') {
+            // نمایش بخش مدیریت
+            document.querySelector('.admin-login').style.display = 'none';
+            adminContent.style.display = 'block';
+            
+            // بارگذاری داده‌ها
+            loadAdminData();
+        } else {
+            showMessage(adminMessage, 'ایمیل یا رمز عبور اشتباه است.', 'error');
+        }
+    });
+    
+    // خروج از پنل مدیریت
+    adminLogout.addEventListener('click', function() {
+        adminContent.style.display = 'none';
+        document.querySelector('.admin-login').style.display = 'block';
+        adminPanel.style.display = 'none';
+        adminEmail.value = '';
+        adminPassword.value = '';
+        adminMessage.textContent = '';
+    });
+}
+
+// بارگذاری داده‌ها در پنل مدیریت
+function loadAdminData() {
+    // بارگذاری آمار
+    const visitData = JSON.parse(localStorage.getItem('bloodstrike_visits') || '{}');
+    document.getElementById('adminTotalVisits').textContent = visitData.totalVisits || 0;
+    document.getElementById('adminTodayVisits').textContent = visitData.todayVisits || 0;
+    
+    // بارگذاری کاربران
+    const users = JSON.parse(localStorage.getItem('bloodstrike_users') || '[]');
+    document.getElementById('adminUserCount').textContent = users.length;
+    
+    const usersList = document.getElementById('usersList');
+    usersList.innerHTML = '';
+    
+    if (users.length === 0) {
+        usersList.innerHTML = '<p>هیچ کاربری ثبت‌نام نکرده است.</p>';
+    } else {
+        users.forEach(user => {
+            const userElement = document.createElement('div');
+            userElement.className = 'admin-list-item';
+            userElement.innerHTML = `
+                <div>
+                    <strong>${user.name}</strong>
+                    <br>
+                    <small>${user.email}</small>
+                </div>
+                <small>${new Date(user.createdAt).toLocaleDateString('fa-IR')}</small>
+            `;
+            usersList.appendChild(userElement);
+        });
+    }
+    
+    // بارگذاری پیشنهادات
+    const suggestions = JSON.parse(localStorage.getItem('bloodstrike_suggestions') || '[]');
+    const suggestionsList = document.getElementById('suggestionsList');
+    suggestionsList.innerHTML = '';
+    
+    if (suggestions.length === 0) {
+        suggestionsList.innerHTML = '<p>هیچ پیشنهادی ثبت نشده است.</p>';
+    } else {
+        suggestions.forEach(suggestion => {
+            const suggestionElement = document.createElement('div');
+            suggestionElement.className = 'admin-list-item';
+            suggestionElement.innerHTML = `
+                <div>
+                    <strong>${suggestion.userName}</strong>
+                    <p>${suggestion.text}</p>
+                </div>
+                <small>${new Date(suggestion.createdAt).toLocaleDateString('fa-IR')}</small>
+            `;
+            suggestionsList.appendChild(suggestionElement);
+        });
+    }
+}
+
+// تابع کمکی برای نمایش پیام
+function showMessage(element, message, type) {
+    if (!element) return;
+    
+    element.textContent = message;
+    element.className = `message ${type}`;
+    element.style.display = 'block';
+    
+    // پنهان کردن خودکار پیام پس از 5 ثانیه
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 5000);
+}
+
+// تابع کمکی برای بررسی ایمیل
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// تابع کمکی برای تولید نام تصادفی
+function generateRandomName() {
+    const names = ['شاهین', 'رها', 'کامران', 'نازنین', 'پرهام', 'یاسمن', 'آرمان', 'ستایش', 'کیان', 'النا'];
+    const surnames = ['محمدی', 'رضایی', 'کریمی', 'حسینی', 'جعفری', 'موسوی', 'قاسمی', 'اکبری', 'امیری', 'مرادی'];
+    return `${names[Math.floor(Math.random() * names.length)]} ${surnames[Math.floor(Math.random() * surnames.length)]}`;
+}
