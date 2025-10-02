@@ -3,247 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شبکه‌های اجتماعی</title>
+    <title>BloodStrike Farsi - مرجع گیمینگ فارسی</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            width: 100%;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .games-list {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .games-list h2 {
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-        
-        .games-list ul {
-            list-style-type: none;
-            padding-right: 20px;
-        }
-        
-        .games-list li {
-            padding: 10px 0;
-            font-size: 1.2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .games-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .divider {
-            height: 3px;
-            background: rgba(255, 255, 255, 0.3);
-            margin: 40px 0;
-            border-radius: 10px;
-        }
-        
-        .social-section {
-            margin-bottom: 40px;
-        }
-        
-        .social-section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .social-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 180px;
-            text-decoration: none;
-            color: white;
-        }
-        
-        .social-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-        
-        .social-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        .social-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .social-desc {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .about-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .about-section h2 {
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-        
-        .about-section p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .social-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .social-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .games-list, .about-section {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>محبوب ترین بازی‌ها</h1>
-        </header>
-        
-        <section class="games-list">
-            <h2>لیست بازی‌ها</h2>
-            <ul>
-                <li>بازی ۱</li>
-                <li>بازی ۲</li>
-                <li>بازی ۳</li>
-            </ul>
-        </section>
-        
-        <div class="divider"></div>
-        
-        <section class="social-section">
-            <h2>شبکه‌های اجتماعی</h2>
-            <div class="social-grid">
-                <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card" target="_blank">
-                    <i class="fab fa-instagram social-icon"></i>
-                    <div class="social-name">پیج اینستاگرام</div>
-                    <div class="social-desc">مطالب و ویدیوهای جذاب</div>
-                </a>
-                
-                <a href="https://t.me/BloodStrikeFarsi" class="social-card" target="_blank">
-                    <i class="fab fa-telegram social-icon"></i>
-                    <div class="social-name">کانال تلگرام</div>
-                    <div class="social-desc">آخرین اخبار و به‌روزرسانی‌ها</div>
-                </a>
-                
-                <a href="https://t.me/BloodStrikeFarsy" class="social-card" target="_blank">
-                    <i class="fab fa-telegram social-icon"></i>
-                    <div class="social-name">گروه تلگرام</div>
-                    <div class="social-desc">بحث و تبادل نظر با سایر بازیکنان</div>
-                </a>
-                
-                <a href="https://rubika.ir/bloodstrikefarsi" class="social-card" target="_blank">
-                    <i class="fas fa-comment social-icon"></i>
-                    <div class="social-name">کانال روبیکا</div>
-                    <div class="social-desc">محتواهای اختصاصی در روبیکا</div>
-                </a>
-                
-                <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card" target="_blank">
-                    <i class="fas fa-users social-icon"></i>
-                    <div class="social-name">گروه روبیکا</div>
-                    <div class="social-desc">جامعه فعال بازیکنان</div>
-                </a>
-                
-                <a href="https://ble.ir/bloodstrikefarsi" class="social-card" target="_blank">
-                    <i class="fas fa-comment-dots social-icon"></i>
-                    <div class="social-name">کانال بله</div>
-                    <div class="social-desc">پیام‌رسان داخلی بله</div>
-                </a>
-                
-                <a href="https://www.aparat.com/Bloodstrike" class="social-card" target="_blank">
-                    <i class="fas fa-play-circle social-icon"></i>
-                    <div class="social-name">پیج آپارات</div>
-                    <div class="social-desc">ویدیوهای آموزشی و گیم پلی</div>
-                </a>
+    <!-- هدر سایت -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>BloodStrike Farsi</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">صفحه اصلی</a></li>
+                    <li><a href="#games">بازی‌ها</a></li>
+                    <li><a href="#social">شبکه‌های اجتماعی</a></li>
+                    <li><a href="#about">درباره ما</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- بخش اصلی -->
+    <main>
+        <!-- بخش هیرو -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">به دنیای گیمینگ خوش آمدید</h1>
+                <p class="hero-description">مرجع تخصصی بازی BloodStrike و سایر بازی‌های محبوب</p>
+                <div class="hero-buttons">
+                    <a href="#games" class="btn btn-primary">مشاهده بازی‌ها</a>
+                    <a href="#social" class="btn btn-secondary">پیوستن به جامعه</a>
+                </div>
+            </div>
+            <div class="hero-background">
+                <div class="floating-element el1"></div>
+                <div class="floating-element el2"></div>
+                <div class="floating-element el3"></div>
             </div>
         </section>
-        
-        <section class="about-section">
-            <h2>درباره ما</h2>
-            <p>این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد.</p>
+
+        <!-- بخش بازی‌های محبوب -->
+        <section id="games" class="games-section">
+            <div class="container">
+                <h2 class="section-title">محبوب ترین بازی‌ها</h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3>BloodStrike</h3>
+                        <p>بازی اکشن و تیراندازی آنلاین با گرافیک فوق العاده</p>
+                        <div class="game-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-icon">
+                            <i class="fas fa-battle-net"></i>
+                        </div>
+                        <h3>بازی ۲</h3>
+                        <p>توضیحات مختصری درباره بازی دوم</p>
+                        <div class="game-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-icon">
+                            <i class="fas fa-ghost"></i>
+                        </div>
+                        <h3>بازی ۳</h3>
+                        <p>توضیحات مختصری درباره بازی سوم</p>
+                        <div class="game-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-    </div>
+
+        <!-- بخش شبکه‌های اجتماعی -->
+        <section id="social" class="social-section">
+            <div class="container">
+                <h2 class="section-title">شبکه‌های اجتماعی</h2>
+                <div class="social-grid">
+                    <!-- اینستاگرام -->
+                    <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>پیج اینستاگرام</h3>
+                            <p>مطالب و ویدیوهای جذاب گیمینگ</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+
+                    <!-- کانال تلگرام -->
+                    <a href="https://t.me/BloodStrikeFarsi" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>کانال تلگرام</h3>
+                            <p>آخرین اخبار و به‌روزرسانی‌ها</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+
+                    <!-- گروه تلگرام -->
+                    <a href="https://t.me/BloodStrikeFarsy" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>گروه تلگرام</h3>
+                            <p>بحث و تبادل نظر با سایر بازیکنان</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+
+                    <!-- کانال روبیکا -->
+                    <a href="https://rubika.ir/bloodstrikefarsi" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>کانال روبیکا</h3>
+                            <p>محتواهای اختصاصی در روبیکا</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+
+                    <!-- گروه روبیکا -->
+                    <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>گروه روبیکا</h3>
+                            <p>جامعه فعال بازیکنان</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+
+                    <!-- کانال بله -->
+                    <a href="https://ble.ir/bloodstrikefarsi" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>کانال بله</h3>
+                            <p>پیام‌رسان داخلی بله</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+
+                    <!-- آپارات -->
+                    <a href="https://www.aparat.com/Bloodstrike" class="social-card" target="_blank">
+                        <div class="social-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="social-content">
+                            <h3>پیج آپارات</h3>
+                            <p>ویدیوهای آموزشی و گیم پلی</p>
+                        </div>
+                        <div class="social-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش درباره ما -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">درباره ما</h2>
+                        <p>این سایت برای معرفی کانال و پیچ گیمینگ ساخته شده است و جدیدترین محتواها را ارائه می‌دهد. ما در اینجا بهترین و به‌روزترین اطلاعات درباره بازی BloodStrike و سایر بازی‌های محبوب را جمع‌آوری کرده‌ایم.</p>
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>آپدیت مداوم محتوا</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-users"></i>
+                                <span>جامعه فعال بازیکنان</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-headset"></i>
+                                <span>پشتیبانی آنلاین</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BloodStrike Farsi</h3>
+                    <p>مرجع تخصصی بازی‌های گیمینگ به زبان فارسی</p>
+                </div>
+                <div class="footer-section">
+                    <h4>لینک‌های سریع</h4>
+                    <ul>
+                        <li><a href="#home">صفحه اصلی</a></li>
+                        <li><a href="#games">بازی‌ها</a></li>
+                        <li><a href="#social">شبکه‌های اجتماعی</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تماس با ما</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BloodStrike Farsi. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
