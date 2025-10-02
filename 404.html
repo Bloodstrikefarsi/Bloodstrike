@@ -9,11 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- پس‌زمینه سه بعدی -->
+    <div class="bg-3d">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
+                    <div class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
                     <span>BloodStrike Farsi</span>
                 </div>
             </div>
@@ -21,65 +30,17 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <div class="error-container">
+        <section class="hero" style="min-height: 80vh;">
+            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
+                <div class="hero-text">
                     <div class="error-code">404</div>
-                    <h1 class="error-title">صفحه مورد نظر یافت نشد</h1>
-                    <p class="error-description">متأسفانه صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.</p>
-                    <div class="error-actions">
+                    <h1 class="hero-title">صفحه مورد نظر یافت نشد</h1>
+                    <p class="hero-description">متأسفانه صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.</p>
+                    <div class="hero-buttons" style="justify-content: center;">
                         <a href="index.html" class="btn btn-primary">
-                            <i class="fas fa-home"></i>
-                            بازگشت به صفحه اصلی
+                            <span class="btn-text">بازگشت به صفحه اصلی</span>
+                            <div class="btn-glow"></div>
                         </a>
-                        <a href="#games" class="btn btn-secondary">
-                            <i class="fas fa-gamepad"></i>
-                            مشاهده بازی‌ها
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-background">
-                <div class="floating-element el1"></div>
-                <div class="floating-element el2"></div>
-                <div class="floating-element el3"></div>
-            </div>
-        </section>
-
-        <!-- بخش آمار و کاربران آنلاین -->
-        <section id="stats" class="stats-section">
-            <div class="container">
-                <h2 class="section-title">آمار سایت</h2>
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>بازدید کل</h3>
-                            <p id="totalVisits">0</p>
-                            <span>تعداد کل بازدیدهای سایت</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>کاربران آنلاین</h3>
-                            <p id="onlineUsers">0</p>
-                            <span>کاربران فعال در 15 دقیقه گذشته</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>بازدید امروز</h3>
-                            <p id="todayVisits">0</p>
-                            <span>بازدیدهای امروز</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -95,12 +56,6 @@
     </footer>
 
     <style>
-        .error-container {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
         .error-code {
             font-size: 8rem;
             font-weight: 700;
@@ -108,87 +63,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
-            line-height: 1;
-        }
-        
-        .error-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--light-color);
-        }
-        
-        .error-description {
-            font-size: 1.2rem;
             margin-bottom: 2rem;
-            opacity: 0.8;
-        }
-        
-        .error-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .error-actions .btn i {
-            margin-left: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 6rem;
-            }
-            
-            .error-title {
-                font-size: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .error-code {
-                font-size: 4rem;
-            }
-            
-            .error-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .error-actions .btn {
-                width: 100%;
-                max-width: 250px;
-            }
+            line-height: 1;
         }
     </style>
 
-    <script>
-        // سیستم آمار ساده برای صفحه 404
-        document.addEventListener('DOMContentLoaded', function() {
-            const storageKey = 'bloodstrike_visits';
-            
-            // دریافت داده‌های موجود
-            let visitData = JSON.parse(localStorage.getItem(storageKey) || '{}');
-            
-            // نمایش آمار
-            const totalVisitsElement = document.getElementById('totalVisits');
-            const todayVisitsElement = document.getElementById('todayVisits');
-            const onlineUsersElement = document.getElementById('onlineUsers');
-            
-            if (totalVisitsElement) {
-                totalVisitsElement.textContent = (visitData.totalVisits || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
-            
-            if (todayVisitsElement) {
-                todayVisitsElement.textContent = (visitData.todayVisits || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
-            
-            if (onlineUsersElement) {
-                // محاسبه کاربران آنلاین (تصادفی برای صفحه 404)
-                const onlineCount = Math.floor(Math.random() * 5) + 1;
-                onlineUsersElement.textContent = onlineCount;
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
