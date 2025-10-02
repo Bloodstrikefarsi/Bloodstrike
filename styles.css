@@ -1,18 +1,37 @@
-:root { --bg:#121212; --text:#f0f0f0; --accent:#ff5722; }
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-.container{max-width:900px;margin:0 auto;padding:2rem}
-.site-header{background:#1f1f1f;padding:1rem 0;text-align:center}
-.menu{list-style:none;padding:0;display:flex;justify-content:center;gap:1rem}
-.menu li a{color:var(--text);text-decoration:none;font-weight:bold}
-.menu li a:hover{color:var(--accent)}
-.hero{padding:2rem 0;text-align:center}
-.btn{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:white;text-decoration:none;margin-top:1rem}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:1.5rem}
-.card{padding:1rem;background:#1f1f1f;border-radius:10px;text-align:center}
-.contact,.about{padding:2rem 0;text-align:center}
-.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;justify-items:center;align-items:center;margin-top:1rem}
-.social-grid a{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--text);font-weight:bold;background:#1f1f1f;padding:1rem;border-radius:10px;transition:transform 0.2s, background 0.2s}
-.social-grid a:hover{background:#222;color:var(--accent);transform:translateY(-5px)}
-.social-grid a img{width:50px;height:50px;margin-bottom:0.5rem}
-.site-footer{padding:1.5rem 0;text-align:center;color:#999;margin-top:2rem}
+.social-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+  justify-content:center;
+  margin-top:1rem;
+}
+.social-card{
+  background:#1f1f1f;
+  padding:1rem 1.5rem;
+  border-radius:10px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width:130px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.3);
+  transition:transform 0.2s, background 0.2s;
+}
+.social-card span{
+  margin-bottom:0.5rem;
+  font-weight:bold;
+}
+.social-card a{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:bold;
+  background:#222;
+  padding:0.4rem 0.8rem;
+  border-radius:6px;
+  transition:background 0.2s;
+}
+.social-card a:hover{
+  background:var(--accent);
+  color:#fff;
+  transform:translateY(-3px);
+}
