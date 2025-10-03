@@ -113,24 +113,118 @@ header .container {
     color: var(--primary-dark);
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 30px;
+    height: 21px;
+    justify-content: space-between;
 }
 
-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    padding: 8px 15px;
-    border-radius: 20px;
+.hamburger-menu span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-dark);
+    border-radius: 3px;
     transition: var(--transition);
 }
 
-nav a:hover {
-    background-color: var(--primary-light);
-    color: white;
+/* Sidebar Navigation */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
+    transition: var(--transition);
+    padding: 20px;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header h3 {
+    color: var(--primary-dark);
+    font-size: 22px;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-sidebar:hover {
+    color: var(--primary-color);
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.sidebar-menu a:hover {
+    background-color: rgba(30, 136, 229, 0.1);
+    color: var(--primary-color);
+}
+
+.sidebar-menu a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
 }
 
 /* Advertisement Banner */
@@ -314,6 +408,7 @@ nav a:hover {
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
 .stat-card {
@@ -346,6 +441,80 @@ nav a:hover {
 
 .stat-card p {
     color: var(--text-light);
+}
+
+/* Members Online Section */
+.members-online {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+}
+
+.members-online h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    font-size: 22px;
+}
+
+.online-users {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.user-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.user-status {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4CAF50;
 }
 
 /* Clock Section */
@@ -492,9 +661,8 @@ footer {
         gap: 15px;
     }
     
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
+    .hamburger-menu {
+        display: flex;
     }
     
     .section-header {
@@ -522,5 +690,9 @@ footer {
     
     #date {
         font-size: 18px;
+    }
+    
+    .online-users {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     }
 }
