@@ -3,524 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodStrike Farsi - مرجع گیمینگ فارسی</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bloodstrike Farsi - معرفی بازی Bloodstrike</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --white: #ffffff;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* پس‌زمینه متحرک گیمینگ */
+        .gaming-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-100px) translateX(100px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+
+        /* هدر */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--white), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-icon {
+            color: var(--light-blue);
+            font-size: 2.5rem;
+        }
+
+        /* ناوبری */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: var(--glass-bg);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--light-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* محتوای اصلی */
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--light-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        /* بخش‌های مختلف */
+        .section-placeholder {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .game-intro {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .game-intro p {
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--light-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(30, 58, 138, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--light-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ساعت و تاریخ */
+        .datetime-container {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(30, 58, 138, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #persian-date {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        #digital-clock {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* بخش حمایت مالی */
+        .support-section {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .support-btn {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* تبلیغات */
+        .ad-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            width: 300px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: none;
+        }
+
+        .ad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .ad-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .ad-content {
+            text-align: center;
+            padding: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* شبکه‌های اجتماعی */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(59, 130, 246, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .social-icon {
+            font-size: 1.2rem;
+        }
+
+        /* فوتر */
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-blue);
+        }
+
+        .copyright {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .stats-container {
+                flex-direction: column;
+            }
+
+            .social-links {
+                flex-direction: column;
+            }
+
+            .ad-container {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- تشخیص ربات -->
-    <div id="botDetection" class="bot-detection">
-        <div class="captcha-container">
-            <h2>لطفا ثابت کنید که ربات نیستید</h2>
-            <div class="captcha-challenge">
-                <p>عدد زیر را در کادر وارد کنید:</p>
-                <div class="captcha-code" id="captchaCode"></div>
-                <input type="text" id="captchaInput" placeholder="عدد بالا را وارد کنید" autocomplete="off">
-                <button id="captchaSubmit">تایید</button>
-                <div id="captchaMessage" class="message"></div>
-            </div>
-        </div>
-    </div>
+    <!-- پس‌زمینه متحرک گیمینگ -->
+    <div class="gaming-bg" id="gaming-bg"></div>
 
-    <!-- هدر سایت -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>BloodStrike Farsi</span>
-                </div>
-                
-                <!-- ساعت و تاریخ جدید با طراحی شیشه‌ای -->
-                <div class="datetime-container">
-                    <div class="datetime-glass">
-                        <div class="datetime-content">
-                            <div class="date-part">
-                                <div class="day-name" id="dayName">شنبه</div>
-                                <div class="date-numbers">
-                                    <span class="day" id="day">01</span>
-                                    <span class="separator">/</span>
-                                    <span class="month" id="month">01</span>
-                                    <span class="separator">/</span>
-                                    <span class="year" id="year">1403</span>
-                                </div>
-                            </div>
-                            <div class="time-part">
-                                <div class="time" id="time">00:00:00</div>
-                            </div>
-                        </div>
-                        <div class="glass-reflection"></div>
-                    </div>
-                </div>
-                
-                <ul class="nav-menu">
-                    <li><a href="#home">صفحه اصلی</a></li>
-                    <li><a href="#games">بازی‌ها</a></li>
-                    <li><a href="#social">شبکه‌های اجتماعی</a></li>
-                    <li><a href="#fun">آمار فان</a></li>
-                    <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#register">ثبت نام</a></li>
-                    <li><a href="#suggestions">پیشنهادات</a></li>
-                    <li><a href="#donate">حمایت</a></li>
-                    <li><a href="#contact">تماس با ما</a></li>
-                    <li><a href="#" id="adminLoginLink">پنل مدیریت</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+    <!-- هدر -->
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-gamepad logo-icon"></i>
+            <h1 class="logo">Bloodstrike Farsi</h1>
+        </div>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#news">اخبار</a></li>
+                <li><a href="#shop">فروشگاه</a></li>
+                <li><a href="#intro">معرفی بازی</a></li>
+                <li><a href="#stats">آمار</a></li>
+                <li><a href="#datetime">ساعت و تاریخ</a></li>
+                <li><a href="#support">حمایت مالی</a></li>
+            </ul>
         </nav>
     </header>
 
-    <!-- بخش اصلی -->
+    <!-- محتوای اصلی -->
     <main>
-        <!-- بخش هیرو -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">به دنیای گیمینگ خوش آمدید</h1>
-                <p class="hero-description">مرجع تخصصی بازی BloodStrike و سایر بازی‌های محبوب</p>
-                <div class="hero-buttons">
-                    <a href="#games" class="btn btn-primary">مشاهده بازی‌ها</a>
-                    <a href="#social" class="btn btn-secondary">پیوستن به جامعه</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.netease.newspike" class="btn btn-download android" target="_blank">
+        <!-- بخش خبری -->
+        <section id="news">
+            <h2>آخرین اخبار</h2>
+            <div class="section-placeholder">
+                <i class="fas fa-newspaper" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <p>هیچ خبری در حال حاضر موجود نیست</p>
+            </div>
+        </section>
+
+        <!-- بخش فروشگاه -->
+        <section id="shop">
+            <h2>فروشگاه</h2>
+            <div class="section-placeholder">
+                <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <p>فروشگاه به زودی راه‌اندازی خواهد شد</p>
+            </div>
+        </section>
+
+        <!-- معرفی بازی -->
+        <section id="intro">
+            <h2>معرفی بازی Bloodstrike</h2>
+            <div class="game-intro">
+                <p>Bloodstrike یک بازی تیراندازی اول شخص هیجان‌انگیز است که در محیط‌های متنوع و با گرافیک با کیفیت ارائه شده است. این بازی با گیم پلی سریع و اکشن‌های مهیج، تجربه‌ای منحصر به فرد از نبردهای تیمی و انفرادی را برای بازیکنان فراهم می‌کند.</p>
+                
+                <p>ویژگی‌های اصلی بازی:</p>
+                <ul>
+                    <li>گرافیک با کیفیت بالا و محیط‌های متنوع</li>
+                    <li>حالت‌های بازی مختلف شامل تیمی، انفرادی و رقابتی</li>
+                    <li>سلاح‌های متنوع و قابل ارتقا</li>
+                    <li>سیستم پیشرفته تطبیق بازیکنان</li>
+                    <li>امکان شخصی‌سازی گسترده شخصیت و تجهیزات</li>
+                </ul>
+                
+                <div class="download-buttons">
+                    <a href="#" class="download-btn">
                         <i class="fab fa-android"></i>
                         دانلود برای اندروید
                     </a>
-                    <a href="https://apps.apple.com/us/app/blood-strike-fps-for-all/id1637059453" class="btn btn-download ios" target="_blank">
+                    <a href="#" class="download-btn">
                         <i class="fab fa-apple"></i>
                         دانلود برای آیفون
                     </a>
                 </div>
             </div>
-            <div class="hero-background">
-                <div class="floating-element el1"></div>
-                <div class="floating-element el2"></div>
-                <div class="floating-element el3"></div>
-            </div>
         </section>
 
-        <!-- بخش بازی‌های محبوب -->
-        <section id="games" class="games-section">
-            <div class="container">
-                <h2 class="section-title">محبوب ترین بازی‌ها</h2>
-                <div class="games-grid">
-                    <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        <h3>BloodStrike</h3>
-                        <p>بازی اکشن و تیراندازی آنلاین با گرافیک فوق العاده</p>
-                        <div class="game-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <div class="game-downloads">
-                            <a href="https://play.google.com/store/apps/details?id=com.netease.newspike" class="btn-download-small android" target="_blank">
-                                <i class="fab fa-android"></i>
-                                اندروید
-                            </a>
-                            <a href="https://apps.apple.com/us/app/blood-strike-fps-for-all/id1637059453" class="btn-download-small ios" target="_blank">
-                                <i class="fab fa-apple"></i>
-                                iOS
-                            </a>
-                        </div>
-                    </div>
-                    <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-battle-net"></i>
-                        </div>
-                        <h3>بازی ۲</h3>
-                        <p>توضیحات مختصری درباره بازی دوم</p>
-                        <div class="game-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="game-card">
-                        <div class="game-icon">
-                            <i class="fas fa-ghost"></i>
-                        </div>
-                        <h3>بازی ۳</h3>
-                        <p>توضیحات مختصری درباره بازی سوم</p>
-                        <div class="game-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                    </div>
+        <!-- آمار -->
+        <section id="stats">
+            <h2>آمار بازدید و کاربران</h2>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-value" id="visitor-count">12,458</div>
+                    <div class="stat-label">بازدید کل</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="online-count">347</div>
+                    <div class="stat-label">کاربران آنلاین</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">24.5k</div>
+                    <div class="stat-label">دانلودها</div>
                 </div>
             </div>
         </section>
 
-        <!-- بخش فان -->
-        <section id="fun" class="fun-section">
-            <div class="container">
-                <h2 class="section-title">آمار فان و طنز! 😄</h2>
-                <div class="fun-grid">
-                    <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h3>سابقه فعالیت</h3>
-                        <p class="fun-number">۸۵ سال</p>
-                        <p class="fun-description">با وجود اینکه بازی فقط ۳ ساله منتشر شده!</p>
-                    </div>
-                    <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3>معاملات موفق</h3>
-                        <p class="fun-number">بیش از ۸۵ میلیون</p>
-                        <p class="fun-description">معامله در سراسر جهان!</p>
-                    </div>
-                    <div class="fun-card">
-                        <div class="fun-icon">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
-                        <h3>بازی تحت پوشش</h3>
-                        <p class="fun-number">۸۵ عدد</p>
-                        <p class="fun-description">بازی مختلف فقط توسط ما!</p>
-                    </div>
-                </div>
+        <!-- ساعت و تاریخ -->
+        <section id="datetime">
+            <h2>ساعت و تاریخ</h2>
+            <div class="datetime-container">
+                <div id="persian-date">در حال بارگذاری...</div>
+                <div id="digital-clock">00:00:00</div>
             </div>
         </section>
 
-        <!-- بخش شبکه‌های اجتماعی -->
-        <section id="social" class="social-section">
-            <div class="container">
-                <h2 class="section-title">شبکه‌های اجتماعی</h2>
-                <div class="social-grid">
-                    <!-- اینستاگرام -->
-                    <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>پیج اینستاگرام</h3>
-                            <p>مطالب و ویدیوهای جذاب گیمینگ</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-
-                    <!-- کانال تلگرام -->
-                    <a href="https://t.me/BloodStrikeFarsi" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-telegram"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>کانال تلگرام</h3>
-                            <p>آخرین اخبار و به‌روزرسانی‌ها</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-
-                    <!-- گروه تلگرام -->
-                    <a href="https://t.me/BloodStrikeFarsy" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-telegram"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>گروه تلگرام</h3>
-                            <p>بحث و تبادل نظر با سایر بازیکنان</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-
-                    <!-- کانال روبیکا -->
-                    <a href="https://rubika.ir/bloodstrikefarsi" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fas fa-comment"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>کانال روبیکا</h3>
-                            <p>محتواهای اختصاصی در روبیکا</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-
-                    <!-- گروه روبیکا -->
-                    <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>گروه روبیکا</h3>
-                            <p>جامعه فعال بازیکنان</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-
-                    <!-- کانال بله -->
-                    <a href="https://ble.ir/bloodstrikefarsi" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fas fa-comment-dots"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>کانال بله</h3>
-                            <p>پیام‌رسان داخلی بله</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-
-                    <!-- آپارات -->
-                    <a href="https://www.aparat.com/Bloodstrike" class="social-card" target="_blank">
-                        <div class="social-icon">
-                            <i class="fas fa-play-circle"></i>
-                        </div>
-                        <div class="social-content">
-                            <h3>پیج آپارات</h3>
-                            <p>ویدیوهای آموزشی و گیم پلی</p>
-                        </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش آمار و کاربران آنلاین -->
-        <section id="stats" class="stats-section">
-            <div class="container">
-                <h2 class="section-title">آمار سایت</h2>
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>بازدید کل</h3>
-                            <p id="totalVisits">0</p>
-                            <span>تعداد کل بازدیدهای سایت</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3>بازدید امروز</h3>
-                            <p id="todayVisits">0</p>
-                            <span>بازدیدهای امروز</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- نمایش لیست کاربران آنلاین -->
-                <div class="online-users-section">
-                    <h3 class="subsection-title">کاربران آنلاین در حال حاضر</h3>
-                    <div class="online-users-list" id="onlineUsersList">
-                        <!-- لیست کاربران به صورت داینامیک پر می‌شود -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش ثبت نام -->
-        <section id="register" class="register-section">
-            <div class="container">
-                <h2 class="section-title">ساخت حساب کاربری</h2>
-                <div class="register-form">
-                    <div class="form-group">
-                        <label for="userEmail">ایمیل:</label>
-                        <input type="email" id="userEmail" placeholder="example@gmail.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userPassword">رمز عبور:</label>
-                        <input type="password" id="userPassword" placeholder="رمز عبور خود را وارد کنید" required>
-                    </div>
-                    <button id="registerBtn" class="btn btn-primary">ساخت حساب کاربری</button>
-                    <div id="registerMessage" class="message"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش پیشنهادات -->
-        <section id="suggestions" class="suggestions-section">
-            <div class="container">
-                <h2 class="section-title">پیشنهادات و انتقادات</h2>
-                <div class="suggestions-form">
-                    <div class="form-group">
-                        <label for="suggestionText">پیشنهاد شما:</label>
-                        <textarea id="suggestionText" placeholder="پیشنهادات و انتقادات خود را اینجا بنویسید..." rows="5"></textarea>
-                    </div>
-                    <button id="submitSuggestion" class="btn btn-primary">ارسال پیشنهاد</button>
-                    <div id="suggestionMessage" class="message"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش حمایت -->
-        <section id="donate" class="donate-section">
-            <div class="container">
-                <h2 class="section-title">حمایت از ما</h2>
-                <div class="donate-content">
-                    <p>این بخش به زودی فعال خواهد شد...</p>
-                    <div class="donate-placeholder">
-                        <i class="fas fa-heart"></i>
-                        <p>از حمایت شما سپاسگزاریم</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش تماس با ما -->
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <h2 class="section-title">تماس با ما</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h3>ایمیل</h3>
-                                <a href="mailto:bloodstrikefarsi80@gmail.com">bloodstrikefarsi80@gmail.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- حمایت مالی -->
+        <section id="support">
+            <h2>حمایت مالی</h2>
+            <div class="support-section">
+                <p>این بخش به زودی فعال خواهد شد</p>
+                <button class="support-btn" disabled>در حال حاضر غیرفعال</button>
             </div>
         </section>
     </main>
 
     <!-- تبلیغات -->
-    <div id="advertisement" class="advertisement">
+    <div class="ad-container" id="ad-container">
+        <div class="ad-header">
+            <span>تبلیغات</span>
+            <button class="ad-close" id="ad-close">×</button>
+        </div>
         <div class="ad-content">
-            <span class="ad-close" id="adClose">&times;</span>
-            <h3>تبلیغات</h3>
-            <p>این یک تبلیغ نمونه است. برای بستن روی ضربدر کلیک کنید.</p>
-            <a href="#" class="btn btn-primary">مشاهده بیشتر</a>
-        </div>
-    </div>
-
-    <!-- پنل مدیریت -->
-    <div id="adminPanel" class="admin-panel">
-        <div class="admin-login">
-            <h2>ورود به پنل مدیریت</h2>
-            <div class="form-group">
-                <label for="adminEmail">ایمیل:</label>
-                <input type="email" id="adminEmail" placeholder="bloodstrikefarsi80@gmail.com">
-            </div>
-            <div class="form-group">
-                <label for="adminPassword">رمز عبور:</label>
-                <input type="password" id="adminPassword" placeholder="رمز عبور">
-            </div>
-            <button id="adminLoginBtn" class="btn btn-primary">ورود به پنل</button>
-            <button id="adminClose" class="btn btn-secondary">بستن</button>
-            <div id="adminMessage" class="message"></div>
-        </div>
-
-        <div id="adminContent" class="admin-content" style="display: none;">
-            <div class="admin-header">
-                <h2>پنل مدیریت</h2>
-                <button id="adminLogout" class="btn btn-secondary">خروج</button>
-            </div>
-            
-            <div class="admin-sections">
-                <div class="admin-section">
-                    <h3>مدیریت کاربران</h3>
-                    <div id="usersList" class="admin-list">
-                        <!-- لیست کاربران -->
-                    </div>
-                </div>
-                
-                <div class="admin-section">
-                    <h3>پیشنهادات کاربران</h3>
-                    <div id="suggestionsList" class="admin-list">
-                        <!-- لیست پیشنهادات -->
-                    </div>
-                </div>
-                
-                <div class="admin-section">
-                    <h3>آمار سایت</h3>
-                    <div class="admin-stats">
-                        <div class="admin-stat">
-                            <span>بازدید کل:</span>
-                            <strong id="adminTotalVisits">0</strong>
-                        </div>
-                        <div class="admin-stat">
-                            <span>بازدید امروز:</span>
-                            <strong id="adminTodayVisits">0</strong>
-                        </div>
-                        <div class="admin-stat">
-                            <span>کاربران ثبت‌نام شده:</span>
-                            <strong id="adminUserCount">0</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>فضای تبلیغاتی خالی است</p>
         </div>
     </div>
 
     <!-- فوتر -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>BloodStrike Farsi</h3>
-                    <p>مرجع تخصصی بازی BloodStrike به زبان فارسی</p>
-                    <div class="footer-downloads">
-                        <a href="https://play.google.com/store/apps/details?id=com.netease.newspike" class="footer-download-btn android" target="_blank">
-                            <i class="fab fa-android"></i>
-                            دانلود برای اندروید
-                        </a>
-                        <a href="https://apps.apple.com/us/app/blood-strike-fps-for-all/id1637059453" class="footer-download-btn ios" target="_blank">
-                            <i class="fab fa-apple"></i>
-                            دانلود برای آیفون
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>لینک‌های سریع</h4>
-                    <ul>
-                        <li><a href="#home">صفحه اصلی</a></li>
-                        <li><a href="#games">معرفی بازی</a></li>
-                        <li><a href="#social">شبکه‌های اجتماعی</a></li>
-                        <li><a href="#stats">آمار سایت</a></li>
-                        <li><a href="#register">ثبت نام</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>تماس با ما</h4>
-                    <div class="social-links">
-                        <a href="https://t.me/BloodStrikeFarsi" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="mailto:bloodstrikefarsi80@gmail.com"><i class="fas fa-envelope"></i></a>
-                    </div>
-                    <div class="contact-email">
-                        <a href="mailto:bloodstrikefarsi80@gmail.com">bloodstrikefarsi80@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 BloodStrike Farsi. تمامی حقوق محفوظ است.</p>
-            </div>
+    <footer>
+        <div class="footer-links">
+            <a href="#news">اخبار</a>
+            <a href="#shop">فروشگاه</a>
+            <a href="#intro">معرفی بازی</a>
+            <a href="#stats">آمار</a>
+            <a href="#datetime">ساعت و تاریخ</a>
+            <a href="#support">حمایت مالی</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-link" target="_blank">
+                <i class="fab fa-instagram social-icon"></i>
+                اینستاگرام
+            </a>
+            <a href="https://t.me/BloodStrikeFarsi" class="social-link" target="_blank">
+                <i class="fab fa-telegram social-icon"></i>
+                کانال تلگرام
+            </a>
+            <a href="https://t.me/BloodStrikeFarsy" class="social-link" target="_blank">
+                <i class="fab fa-telegram social-icon"></i>
+                گروه تلگرام
+            </a>
+            <a href="https://rubika.ir/bloodstrikefarsi" class="social-link" target="_blank">
+                <i class="fas fa-comment social-icon"></i>
+                کانال روبیکا
+            </a>
+            <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-link" target="_blank">
+                <i class="fas fa-users social-icon"></i>
+                گروه روبیکا
+            </a>
+            <a href="https://ble.ir/bloodstrikefarsi" class="social-link" target="_blank">
+                <i class="fas fa-message social-icon"></i>
+                کانال بله
+            </a>
+            <a href="https://www.aparat.com/Bloodstrike" class="social-link" target="_blank">
+                <i class="fas fa-video social-icon"></i>
+                آپارات
+            </a>
+        </div>
+        
+        <div class="copyright">
+            <p>تمامی حقوق برای Bloodstrike Farsi محفوظ است © 2023</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // ایجاد ذرات متحرک در پس‌زمینه
+        function createParticles() {
+            const bg = document.getElementById('gaming-bg');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // اندازه تصادفی
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // موقعیت تصادفی
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // انیمیشن با سرعت تصادفی
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                bg.appendChild(particle);
+            }
+        }
+
+        // تاریخ و ساعت فارسی
+        function updateDateTime() {
+            const now = new Date();
+            
+            // ساعت دیجیتال
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // تاریخ شمسی
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+            };
+            const persianDate = now.toLocaleDateString('fa-IR', options);
+            document.getElementById('persian-date').textContent = persianDate;
+        }
+
+        // آمار تصادفی
+        function updateStats() {
+            // افزایش تعداد بازدیدها به صورت تصادفی
+            const visitorCount = document.getElementById('visitor-count');
+            let currentCount = parseInt(visitorCount.textContent.replace(/,/g, ''));
+            currentCount += Math.floor(Math.random() * 10);
+            visitorCount.textContent = currentCount.toLocaleString('fa-IR');
+            
+            // تعداد کاربران آنلاین تصادفی
+            const onlineCount = document.getElementById('online-count');
+            const randomOnline = Math.floor(Math.random() * 50) + 300;
+            onlineCount.textContent = randomOnline.toLocaleString('fa-IR');
+        }
+
+        // مدیریت تبلیغات
+        function initAds() {
+            const adContainer = document.getElementById('ad-container');
+            const adClose = document.getElementById('ad-close');
+            
+            // نمایش تبلیغ هر یک دقیقه
+            setInterval(() => {
+                adContainer.style.display = 'block';
+            }, 60000);
+            
+            // بستن تبلیغ
+            adClose.addEventListener('click', () => {
+                adContainer.style.display = 'none';
+            });
+        }
+
+        // اسکرول نرم به بخش‌ها
+        function initSmoothScroll() {
+            const navLinks = document.querySelectorAll('.nav-links a, .footer-links a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // راه‌اندازی پس از لود صفحه
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            updateDateTime();
+            updateStats();
+            initAds();
+            initSmoothScroll();
+            
+            // به‌روزرسانی ساعت هر ثانیه
+            setInterval(updateDateTime, 1000);
+            
+            // به‌روزرسانی آمار هر 30 ثانیه
+            setInterval(updateStats, 30000);
+        });
+    </script>
 </body>
 </html>
