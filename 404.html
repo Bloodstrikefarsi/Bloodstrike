@@ -3,71 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه پیدا نشد - 404</title>
+    <title>صفحه پیدا نشد - Bloodstrike Farsi</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- پس‌زمینه سه بعدی -->
-    <div class="bg-3d">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+    <div class="background-animation">
+        <div class="particles"></div>
     </div>
 
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <span>BloodStrike Farsi</span>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero" style="min-height: 80vh;">
-            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
-                <div class="hero-text">
-                    <div class="error-code">404</div>
-                    <h1 class="hero-title">صفحه مورد نظر یافت نشد</h1>
-                    <p class="hero-description">متأسفانه صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.</p>
-                    <div class="hero-buttons" style="justify-content: center;">
-                        <a href="index.html" class="btn btn-primary">
-                            <span class="btn-text">بازگشت به صفحه اصلی</span>
-                            <div class="btn-glow"></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 BloodStrike Farsi. تمامی حقوق محفوظ است.</p>
-            </div>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="glass-card" style="text-align: center; max-width: 500px;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 64px; color: #f44336; margin-bottom: 20px;"></i>
+            <h1 style="color: var(--primary-dark); margin-bottom: 15px;">صفحه مورد نظر یافت نشد</h1>
+            <p style="margin-bottom: 25px; font-size: 18px;">متأسفانه صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.</p>
+            <a href="index.html" style="display: inline-block; background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: white; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">بازگشت به صفحه اصلی</a>
         </div>
-    </footer>
-
-    <style>
-        .error-code {
-            font-size: 8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            line-height: 1;
-        }
-    </style>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
