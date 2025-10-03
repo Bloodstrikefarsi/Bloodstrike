@@ -20,18 +20,33 @@
                 <i class="fas fa-gamepad"></i>
                 <h1>Bloodstrike Farsi</h1>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#news">اخبار</a></li>
-                    <li><a href="#shop">فروشگاه</a></li>
-                    <li><a href="#about">معرفی بازی</a></li>
-                    <li><a href="#download">دانلود</a></li>
-                    <li><a href="#stats">آمار</a></li>
-                    <li><a href="#support">حمایت مالی</a></li>
-                </ul>
-            </nav>
+            <!-- Hamburger Menu for Mobile -->
+            <div class="hamburger-menu" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>منو</h3>
+            <button class="close-sidebar" id="close-sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#news"><i class="fas fa-newspaper"></i> اخبار</a></li>
+            <li><a href="#shop"><i class="fas fa-shopping-cart"></i> فروشگاه</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> معرفی بازی</a></li>
+            <li><a href="#download"><i class="fas fa-download"></i> دانلود</a></li>
+            <li><a href="#stats"><i class="fas fa-chart-line"></i> آمار</a></li>
+            <li><a href="#support"><i class="fas fa-hand-holding-heart"></i> حمایت مالی</a></li>
+        </ul>
+    </nav>
 
     <!-- Main Content -->
     <main>
@@ -148,6 +163,13 @@
                         <i class="fas fa-download"></i>
                         <h3 id="download-count">۰</h3>
                         <p>دانلودها</p>
+                    </div>
+                </div>
+                <!-- Members Online Section -->
+                <div class="members-online">
+                    <h3>کاربران آنلاین</h3>
+                    <div class="online-users" id="online-users">
+                        <!-- Online users will be added dynamically -->
                     </div>
                 </div>
             </div>
