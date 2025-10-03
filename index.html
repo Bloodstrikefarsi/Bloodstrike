@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodStrike Farsi - مرجع گیمینگ فارسی</title>
+    <title>BloodStrike Farsi - مرجع رسمی بازی بلاداسترایک</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,20 +14,12 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>bloodstrikefarsi</span>
+                    <i class="fas fa-crosshairs"></i>
+                    <span>BloodStrike Farsi</span>
                 </div>
                 <div class="datetime" id="datetime">
                     <!-- ساعت و تاریخ اینجا نمایش داده می‌شود -->
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="#home">صفحه اصلی</a></li>
-                    <li><a href="#news">اخبار</a></li>
-                    <li><a href="#game">معرفی بازی</a></li>
-                    <li><a href="#stats">آمار سایت</a></li>
-                    <li><a href="#social">شبکه‌های اجتماعی</a></li>
-                    <li><a href="#fun">آمار فان</a></li>
-                </ul>
             </div>
         </nav>
     </header>
@@ -35,152 +27,144 @@
     <!-- بخش اصلی -->
     <main>
         <!-- بخش هیرو -->
-        <section id="home" class="hero">
+        <section class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">به BloodStrike Farsi خوش آمدید</h1>
-                <p class="hero-description">مرجع تخصصی بازی BloodStrike و مرکز اصلی گیمینگ فارسی</p>
-                <div class="hero-buttons">
-                    <a href="#game" class="btn btn-primary">معرفی بازی</a>
-                    <a href="#social" class="btn btn-secondary">پیوستن به جامعه</a>
+                <h1 class="hero-title">BloodStrike Farsi</h1>
+                <p class="hero-description">مرجع رسمی بازی بلاداسترایک به زبان فارسی</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="totalVisits">0</span>
+                        <span class="stat-label">بازدید کل</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="onlineUsers">0</span>
+                        <span class="stat-label">کاربران آنلاین</span>
+                    </div>
                 </div>
             </div>
+            <div class="hero-overlay"></div>
         </section>
 
         <!-- بخش اخبار -->
-        <section id="news" class="news-section">
+        <section class="news-section">
             <div class="container">
                 <h2 class="section-title">آخرین اخبار</h2>
                 <div class="news-grid">
-                    <div class="news-card">
+                    <div class="news-card glass-card">
+                        <div class="news-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3>به زودی...</h3>
+                        <p>اخبار و به‌روزرسانی‌های جدید به زودی در این بخش قرار خواهد گرفت</p>
+                    </div>
+                    <div class="news-card glass-card">
                         <div class="news-icon">
                             <i class="fas fa-bullhorn"></i>
                         </div>
-                        <h3>به‌روزرسانی جدید</h3>
-                        <p>به‌روزرسانی جدید BloodStrike با ویژگی‌های هیجان‌انگیز منتشر شد</p>
-                        <div class="news-date">
-                            <i class="far fa-calendar"></i>
-                            <span>۲ روز پیش</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>مسابقات فصلی</h3>
-                        <p>مسابقات فصلی BloodStrike با جوایز ارزشمند آغاز شد</p>
-                        <div class="news-date">
-                            <i class="far fa-calendar"></i>
-                            <span>۱ هفته پیش</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>جامعه در حال رشد</h3>
-                        <p>تعداد بازیکنان فارسی‌زبان به ۵۰۰,۰۰۰ نفر رسید</p>
-                        <div class="news-date">
-                            <i class="far fa-calendar"></i>
-                            <span>۲ هفته پیش</span>
-                        </div>
+                        <h3>آپدیت‌های آینده</h3>
+                        <p>اطلاعات مربوط به آپدیت‌های آینده بازی در این بخش منتشر خواهد شد</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- بخش معرفی بازی -->
-        <section id="game" class="game-section">
+        <section class="game-section">
             <div class="container">
                 <h2 class="section-title">معرفی بازی BloodStrike</h2>
                 <div class="game-content">
-                    <div class="game-info">
-                        <div class="game-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-crosshairs"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>تیراندازی اکشن</h3>
-                                <p>تجربه تیراندازی سریع و هیجان‌انگیز با گرافیک فوق‌العاده</p>
-                            </div>
+                    <div class="game-info glass-card">
+                        <div class="game-icon">
+                            <i class="fas fa-crosshairs"></i>
                         </div>
-                        <div class="game-feature">
-                            <div class="feature-icon">
+                        <h3>BloodStrike</h3>
+                        <p>یک بازی تیراندازی اول شخص هیجان‌انگیز با گرافیک فوق‌العاده و گیم‌پلی سریع. در دنیای BloodStrike با دوستان خود تیم تشکیل دهید و در میدان‌های نبرد متنوع به رقابت بپردازید.</p>
+                        
+                        <div class="game-features">
+                            <div class="feature">
+                                <i class="fas fa-users"></i>
+                                <span>حالت چندنفره</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-trophy"></i>
+                                <span>سیستم رتبه‌بندی</span>
+                            </div>
+                            <div class="feature">
                                 <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>سیستم جنگ منحصربه‌فرد</h3>
-                                <p>مبارزات تیمی و انفرادی با استراتژی‌های مختلف</p>
+                                <span>سلاح‌های متنوع</span>
                             </div>
                         </div>
-                        <div class="game-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>بهینه برای موبایل</h3>
-                                <p>تجربه گیمینگ روان در دستگاه‌های اندروید و iOS</p>
-                            </div>
-                        </div>
-                        <div class="game-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>جامعه جهانی</h3>
-                                <p>پیوستن به میلیون‌ها بازیکن در سراسر جهان</p>
+
+                        <div class="download-links">
+                            <h4>دانلود بازی</h4>
+                            <div class="links">
+                                <a href="#" class="download-btn android">
+                                    <i class="fab fa-android"></i>
+                                    دانلود برای اندروید
+                                </a>
+                                <a href="#" class="download-btn ios">
+                                    <i class="fab fa-apple"></i>
+                                    دانلود برای iOS
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="game-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">۵۰۰K+</div>
-                            <div class="stat-label">بازیکن فارسی‌زبان</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">۱۰M+</div>
-                            <div class="stat-label">دانلود جهانی</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">۴.۸</div>
-                            <div class="stat-label">امتیاز در مارکت‌ها</div>
+                    <div class="game-image">
+                        <div class="image-placeholder glass-card">
+                            <i class="fas fa-gamepad"></i>
+                            <p>تصویر بازی</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- بخش آمار سایت -->
-        <section id="stats" class="stats-section">
+        <!-- بخش فروشگاه -->
+        <section class="shop-section">
+            <div class="container">
+                <h2 class="section-title">فروشگاه</h2>
+                <div class="shop-content glass-card">
+                    <div class="shop-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>به زودی راه‌اندازی می‌شود</h3>
+                    <p>فروشگاه آنلاین برای خرید آیتم‌های بازی به زودی در دسترس خواهد بود</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش آمار و کاربران آنلاین -->
+        <section class="stats-section">
             <div class="container">
                 <h2 class="section-title">آمار سایت</h2>
                 <div class="stats-container">
-                    <div class="stat-card">
+                    <div class="stat-card glass-card">
                         <div class="stat-icon">
                             <i class="fas fa-eye"></i>
                         </div>
                         <div class="stat-content">
                             <h3>بازدید کل</h3>
-                            <p id="totalVisits">۱۲,۸۴۷</p>
+                            <p id="totalVisitsCounter">0</p>
                             <span>تعداد کل بازدیدهای سایت</span>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card glass-card">
                         <div class="stat-icon">
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-content">
                             <h3>کاربران آنلاین</h3>
-                            <p id="onlineUsers">۸۵</p>
-                            <span>کاربران فعال در حال حاضر</span>
+                            <p id="onlineUsersCounter">0</p>
+                            <span>کاربران فعال در 15 دقیقه گذشته</span>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card glass-card">
                         <div class="stat-icon">
                             <i class="fas fa-user-plus"></i>
                         </div>
                         <div class="stat-content">
                             <h3>بازدید امروز</h3>
-                            <p id="todayVisits">۳۴۲</p>
+                            <p id="todayVisitsCounter">0</p>
                             <span>بازدیدهای امروز</span>
                         </div>
                     </div>
@@ -189,12 +173,12 @@
         </section>
 
         <!-- بخش شبکه‌های اجتماعی -->
-        <section id="social" class="social-section">
+        <section class="social-section">
             <div class="container">
                 <h2 class="section-title">شبکه‌های اجتماعی</h2>
                 <div class="social-grid">
                     <!-- اینستاگرام -->
-                    <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card" target="_blank">
+                    <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fab fa-instagram"></i>
                         </div>
@@ -202,13 +186,10 @@
                             <h3>پیج اینستاگرام</h3>
                             <p>مطالب و ویدیوهای جذاب گیمینگ</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
 
                     <!-- کانال تلگرام -->
-                    <a href="https://t.me/BloodStrikeFarsi" class="social-card" target="_blank">
+                    <a href="https://t.me/BloodStrikeFarsi" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fab fa-telegram"></i>
                         </div>
@@ -216,13 +197,10 @@
                             <h3>کانال تلگرام</h3>
                             <p>آخرین اخبار و به‌روزرسانی‌ها</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
 
                     <!-- گروه تلگرام -->
-                    <a href="https://t.me/BloodStrikeFarsy" class="social-card" target="_blank">
+                    <a href="https://t.me/BloodStrikeFarsy" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fab fa-telegram"></i>
                         </div>
@@ -230,13 +208,10 @@
                             <h3>گروه تلگرام</h3>
                             <p>بحث و تبادل نظر با سایر بازیکنان</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
 
                     <!-- کانال روبیکا -->
-                    <a href="https://rubika.ir/bloodstrikefarsi" class="social-card" target="_blank">
+                    <a href="https://rubika.ir/bloodstrikefarsi" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-comment"></i>
                         </div>
@@ -244,13 +219,10 @@
                             <h3>کانال روبیکا</h3>
                             <p>محتواهای اختصاصی در روبیکا</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
 
                     <!-- گروه روبیکا -->
-                    <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card" target="_blank">
+                    <a href="https://rubika.ir/joing/DIJCIAFI0AHPYEFYLZSDGFVOPTZLQRHD" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-users"></i>
                         </div>
@@ -258,13 +230,10 @@
                             <h3>گروه روبیکا</h3>
                             <p>جامعه فعال بازیکنان</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
 
                     <!-- کانال بله -->
-                    <a href="https://ble.ir/bloodstrikefarsi" class="social-card" target="_blank">
+                    <a href="https://ble.ir/bloodstrikefarsi" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-comment-dots"></i>
                         </div>
@@ -272,13 +241,10 @@
                             <h3>کانال بله</h3>
                             <p>پیام‌رسان داخلی بله</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
 
                     <!-- آپارات -->
-                    <a href="https://www.aparat.com/Bloodstrike" class="social-card" target="_blank">
+                    <a href="https://www.aparat.com/Bloodstrike" class="social-card glass-card" target="_blank">
                         <div class="social-icon">
                             <i class="fas fa-play-circle"></i>
                         </div>
@@ -286,20 +252,17 @@
                             <h3>پیج آپارات</h3>
                             <p>ویدیوهای آموزشی و گیم پلی</p>
                         </div>
-                        <div class="social-arrow">
-                            <i class="fas fa-arrow-left"></i>
-                        </div>
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- بخش آمار فان -->
-        <section id="fun" class="fun-section">
+        <section class="fun-section">
             <div class="container">
                 <h2 class="section-title">آمار فان و طنز! 😄</h2>
                 <div class="fun-grid">
-                    <div class="fun-card">
+                    <div class="fun-card glass-card">
                         <div class="fun-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
@@ -307,7 +270,7 @@
                         <p class="fun-number">۸۵ سال</p>
                         <p class="fun-description">با وجود اینکه بازی فقط ۳ ساله منتشر شده!</p>
                     </div>
-                    <div class="fun-card">
+                    <div class="fun-card glass-card">
                         <div class="fun-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
@@ -315,7 +278,7 @@
                         <p class="fun-number">بیش از ۸۵ میلیون</p>
                         <p class="fun-description">معامله در سراسر جهان!</p>
                     </div>
-                    <div class="fun-card">
+                    <div class="fun-card glass-card">
                         <div class="fun-icon">
                             <i class="fas fa-gamepad"></i>
                         </div>
@@ -327,30 +290,16 @@
             </div>
         </section>
 
-        <!-- بخش فروشگاه (غیرفعال) -->
-        <section id="shop" class="shop-section">
-            <div class="container">
-                <h2 class="section-title">فروشگاه</h2>
-                <div class="shop-content">
-                    <div class="shop-placeholder">
-                        <i class="fas fa-store"></i>
-                        <h3>به زودی...</h3>
-                        <p>فروشگاه ما در حال آماده‌سازی است</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش حمایت (غیرفعال) -->
-        <section id="donate" class="donate-section">
+        <!-- بخش حمایت -->
+        <section class="donate-section">
             <div class="container">
                 <h2 class="section-title">حمایت از ما</h2>
-                <div class="donate-content">
-                    <div class="donate-placeholder">
+                <div class="donate-content glass-card">
+                    <div class="donate-icon">
                         <i class="fas fa-heart"></i>
-                        <h3>حمایت مالی</h3>
-                        <p>این بخش به زودی فعال خواهد شد</p>
                     </div>
+                    <h3>به زودی فعال خواهد شد</h3>
+                    <p>بخش حمایت مالی به زودی راه‌اندازی می‌شود</p>
                 </div>
             </div>
         </section>
@@ -371,7 +320,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>bloodstrikefarsi</h3>
+                    <h3>BloodStrike Farsi</h3>
                     <p>مرجع تخصصی بازی BloodStrike به زبان فارسی</p>
                 </div>
                 <div class="footer-section">
@@ -383,21 +332,14 @@
                         <li><a href="#social">شبکه‌های اجتماعی</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>ارتباط با ما</h4>
-                    <div class="social-links">
-                        <a href="https://t.me/BloodStrikeFarsi" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="https://www.instagram.com/reel/DPBjFmDDFW1/?igsh=MWJmY2c4M3dpdWtkaw==" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://rubika.ir/bloodstrikefarsi" target="_blank"><i class="fas fa-comment"></i></a>
-                    </div>
-                </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 bloodstrikefarsi. تمامی حقوق محفوظ است.</p>
+                <p>&copy; 2024 BloodStrike Farsi. تمامی حقوق محفوظ است.</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script src="security.js"></script>
 </body>
 </html>
